@@ -229,6 +229,7 @@ package
 				player.x = 64;
 				player.y = 220;
 				add(player);
+				
 			}
 			
 			//ANIMATION
