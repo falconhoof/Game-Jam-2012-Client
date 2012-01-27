@@ -1,0 +1,1 @@
+![Ouroboros](http://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Ouroboros-simple.svg/600px-Ouroboros-simple.svg.png)
