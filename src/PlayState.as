@@ -6,20 +6,20 @@ package
 	public class PlayState extends FlxState
 	{
 		// Tileset that works with AUTO mode (best for thin walls)
-		[Embed(source = 'assets/auto_tiles.png')]private static var auto_tiles:Class;
+		[Embed(source = '../assets/auto_tiles.png')]private static var auto_tiles:Class;
 		
 		// Tileset that works with ALT mode (best for thicker walls)
-		[Embed(source = 'assets/alt_tiles.png')]private static var alt_tiles:Class;
+		[Embed(source = '../assets/alt_tiles.png')]private static var alt_tiles:Class;
 		
 		// Tileset that works with OFF mode (do what you want mode)
-		[Embed(source = 'assets/empty_tiles.png')]private static var empty_tiles:Class;
+		[Embed(source = '../assets/empty_tiles.png')]private static var empty_tiles:Class;
 		
 		// Default tilemaps. Embedding text files is a little weird.
-		[Embed(source = 'assets/default_auto.txt', mimeType = 'application/octet-stream')]private static var default_auto:Class;
-		[Embed(source = 'assets/default_alt.txt', mimeType = 'application/octet-stream')]private static var default_alt:Class;
-		[Embed(source = 'assets/default_empty.txt', mimeType = 'application/octet-stream')]private static var default_empty:Class;
+		[Embed(source = '../assets/default_auto.txt', mimeType = 'application/octet-stream')]private static var default_auto:Class;
+		[Embed(source = '../assets/default_alt.txt', mimeType = 'application/octet-stream')]private static var default_alt:Class;
+		[Embed(source = '../assets/default_empty.txt', mimeType = 'application/octet-stream')]private static var default_empty:Class;
 
-		[Embed(source="assets/spaceman.png")] private static var ImgSpaceman:Class;
+		[Embed(source="../assets/spaceman.png")] private static var ImgSpaceman:Class;
 		
 		// Some static constants for the size of the tilemap tiles
 		private const TILE_WIDTH:uint = 16;
