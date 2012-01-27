@@ -101,6 +101,7 @@ package
 			});
 			add(autoAltBtn);
 			
+			//TEST
 			resetBtn = new FlxButton(8 + autoAltBtn.width, FlxG.height - 24, "Reset", function():void
 			{
 				switch(collisionMap.auto)
