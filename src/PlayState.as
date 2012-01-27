@@ -207,6 +207,28 @@ package
 				player.y -= 1;
 				player.velocity.y = -200;
 			}
+			if(FlxG.keys.justPressed("SPACE"))
+			{
+				collisionMap.setTile(player.x / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x+player.width+1) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x-player.width) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y+player.height) / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y-player.height) / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x+(player.width *2)) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x-(player.width *2)) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y+(player.height*2)) / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y-(player.height*2)) / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x+(player.width *3)) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile((player.x-(player.width *3)) / TILE_WIDTH, player.y / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y+(player.height*3)) / TILE_HEIGHT, 0);
+				collisionMap.setTile(player.x / TILE_WIDTH, (player.y-(player.height*3)) / TILE_HEIGHT, 0);
+				remove(player);
+				FlxG.camera.shake(0.005,0.35);
+				FlxG.camera.flash(0xffd8eba2,0.35);
+				player.x = 64;
+				player.y = 220;
+				add(player);
+			}
 			
 			//ANIMATION
 			if(player.velocity.y != 0)
