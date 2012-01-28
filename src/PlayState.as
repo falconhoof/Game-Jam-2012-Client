@@ -95,11 +95,11 @@ package
 			tutorialTriggers = new Array(); 
 			tutorialTriggers = new Array();
 
-			/*mcLoader = new Loader(); 
+			mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);
-			*/
+			
 
 			/*mcLoader = new Loader();
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
