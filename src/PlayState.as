@@ -56,6 +56,8 @@ package
 			_littleGibs.bounce = 0.5;
 			_littleGibs.makeParticles(ImgGibs,100,10,true,0.5);
 			
+			add(_littleGibs);
+			
 			// Creates a new tilemap with no arguments
 			collisionMap = new FlxTilemap();
 			

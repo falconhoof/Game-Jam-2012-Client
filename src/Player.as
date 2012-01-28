@@ -5,7 +5,7 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		[Embed(source="assets/spaceman.png")] protected var ImgSpaceman:Class;
+		[Embed(source="../assets/spaceman.png")] protected var ImgSpaceman:Class;
 		
 		
 		protected var _restart:Number;
@@ -56,6 +56,7 @@ package
 			solid = true;
 			acceleration.y = 420;
 			maxVelocity.x = 80;
+			_restart = 0;
 		}
 		
 		override public function destroy():void
@@ -71,7 +72,7 @@ package
 			if(!alive)
 			{
 				_restart += FlxG.elapsed;
-				if(_restart > 2)
+				if(_restart > 3)
 				{
 					respawn();
 				}
@@ -99,7 +100,7 @@ package
 			if(FlxG.keys.justPressed("SPACE"))
 			{
 				explode();
-				kill();
+				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffd8eba2,0.35);
 				
@@ -155,7 +156,7 @@ package
 			_map.setTile((x-(width *3)) / 16, y / 16, 0);
 			_map.setTile(x / 16, (y+(height*3)) / 16, 0);
 			_map.setTile(x / 16, (y-(height*3)) / 16, 0);
-			
+			kill();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
 			
