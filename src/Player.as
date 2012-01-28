@@ -15,6 +15,9 @@ package
 		protected var tileSize:Number;
 		protected var spawnX:Number;
 		protected var spawnY:Number;
+		protected var keyboardInputEnabled:Boolean;
+		public var treeToClimb:Tree;
+		public var canClimb:Boolean;
 		
 		private var jumpSpeed : Number;
 		private var runSpeed : Number;
@@ -36,6 +39,8 @@ package
 			spawnY = closestTilePos(Y) + 31;
 			loadGraphic(ImgSpaceman,true,true,32,64);
 			_restart = 0;
+			canClimb = false;
+			keyboardInputEnabled = true;
 			
 			//bounding box tweaks
 			width = 30;
@@ -131,7 +136,13 @@ package
 				facing = RIGHT;
 				acceleration.x += drag.x;
 			}
-			if(FlxG.keys.justPressed("UP") && velocity.y == 0)
+			if(FlxG.keys.justPressed("UP") && canClimb)
+			{
+				//climb tree
+				climbTree();
+				
+			}
+			else if(FlxG.keys.justPressed("UP") && velocity.y == 0)
 			{
 				y -= 1;
 				velocity.y = -jumpSpeed;
@@ -280,10 +291,27 @@ package
 		public function createTree():void
 		{
 			var tree:Tree;
-			tree = new Tree(x, y-96);
+			tree = new Tree(x, y-64);
 			(FlxG.state as PlayState).addTree(tree);
 			FlxG.state.add(tree);
 			kill();
+			tree.play("grow");
+		}
+
+		public function climbTree():void
+		{
+			keyboardInputEnabled = false;
+			play("climbTree");
+			
+			//when animation finished teleport to top of tree
+			solid = false;
+			treeToClimb.canopy.solid = false;
+			y = treeToClimb.y - this.height - 20 ;
+			treeToClimb.canopy.solid = true;
+			solid = true;
+		//	treeToClimb.y;
+			keyboardInputEnabled = true;
+			
 		}
 		
 		override public function kill():void

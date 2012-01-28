@@ -68,6 +68,7 @@ package
 		
 		private var exit:Exit;
 		protected var trees:FlxGroup;
+		public var canopies:FlxGroup;
 		protected var explosions:FlxGroup;
 
 		// Some interface buttons and text
@@ -100,6 +101,7 @@ package
 			else if (spr is Tree)
 			{
 				trees.add(spr as Tree);
+				(spr as Tree).play("idle");
 			}
 		}
 		
@@ -130,7 +132,8 @@ package
 			}
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
-			
+			canopies = new FlxGroup();
+			explosions = new FlxGroup();
 			map=levels[levelId];
 			map.decorateBackground(levelId);
 			
@@ -144,6 +147,7 @@ package
 			
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;		
+			
 			levelId++;
 			setupPlayer();
 			//endLevel=false;
@@ -359,6 +363,8 @@ package
 			// automatically collides each individual tile with the object.
 			//if (!endLevel){
 				FlxG.collide(player, collisionMap);
+				FlxG.overlap(player, trees, climbTree);
+		 		FlxG.collide(player, trees);
 				FlxG.collide(trees, collisionMap, plantTreeFirmly);
 			
 				for each(var t:TutorialTrigger in tutorialTriggers)
@@ -410,6 +416,8 @@ package
 				player.y = treeToClimb.y-64;
 				
 			}
+			//player.canClimb = true;
+			//player.treeToClimb = treeToClimb;
 		}
 
 		public function plantTreeFirmly(tree:Tree, m:FlxTilemap):void
