@@ -69,7 +69,8 @@ package
 			
 			FlxControl.player1.setJumpButton("SPACE", FlxControlHandler.KEYMODE_PRESSED, 200, FlxObject.FLOOR, 250, 200);
 			FlxControl.player1.setMovementSpeed(400, 0, 100, 200, 400, 0);
-			FlxControl.player1.setGravity(0, 400);
+			FlxControl.player1.setGravity(0, 40000);
+			
 		}
 		
 		public function setTileMap(collisionMap:FlxTilemap):void
