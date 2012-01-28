@@ -76,9 +76,6 @@ package
 		
 		override public function create():void
 		{
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 			tutorialTriggers = new Array();
 
 			/*mcLoader = new Loader();
@@ -86,17 +83,12 @@ package
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);
 			*/
-=======
+
 			/*mcLoader = new Loader();
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);*/
-			
->>>>>>> commented out video temporarily and added letterbox
-				
-//put Jon's movie clip fx on top
-			
->>>>>>> parent of d699262... merging again
+
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
 			
