@@ -2,7 +2,7 @@ package
 {
 	public class SpawnTutorialTrigger extends TutorialTrigger
 	{
-		[Embed(source="../assets/spawMessage.png")] protected var SpawnTut:Class;
+		[Embed(source="../assets/spawnMessage.png")] protected var SpawnTut:Class;
 		
 		public function SpawnTutorialTrigger(X:int, Y:int)
 		{

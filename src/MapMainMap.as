@@ -42,18 +42,24 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Player(64, 288);;
+			obj = new CreateTutorialTrigger(192, 272);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new TutorialTrigger(570, 272);;
+			obj = new CreateTutorialTrigger(576, 272);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
-				onAddCallback(obj);			
+				onAddCallback(obj);
+			obj = new Player(64, 272);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);
 		}
 
 		override public function customFunction(param:* = null):* {

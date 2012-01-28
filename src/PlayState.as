@@ -84,10 +84,11 @@ package
 			{
 				exit=spr as Exit;
 			}
-			else if(spr is TutorialTrigger)
-			{
-				tutorialTriggers.push(spr as TutorialTrigger);
-			}
+			//Add more of these
+			//else if(spr is TutorialTrigger)
+			//{
+			//	tutorialTriggers.push(spr as TutorialTrigger);
+			//}
 		}
 		
 		override public function create():void
