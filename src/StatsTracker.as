@@ -17,13 +17,12 @@ package
 		}
 		
 		public function trackItem( item : String, type : String = "number") : void {
+			var object : Object = new Object();
 			if ( type == "number" ) {
-				var object : Object = new Object();
 				object.item = item;
 				object.value = 0;
 				trackedItems.push(object);
 			} else if ( type == "string" ) {
-				var object : Object = new Object();
 				object.item = item;
 				object.value = "";
 				trackedItems.push(object); 
