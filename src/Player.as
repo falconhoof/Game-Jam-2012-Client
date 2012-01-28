@@ -72,6 +72,7 @@ package
 			visible = true;
 			solid = true;
 			acceleration.y = 420;
+			velocity.y = 0;
 			maxVelocity.x = 80;
 			_restart = 0;
 		}
@@ -276,8 +277,9 @@ package
 			flicker(0);
 			exists = true;
 			visible = false;
-			velocity.make();
-			acceleration.make();
+			
+			//velocity.make();
+			//acceleration.make();
 		}
 	}
 }
