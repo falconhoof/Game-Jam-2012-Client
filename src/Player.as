@@ -221,34 +221,20 @@ package
 		
 		public function createTiles():void
 		{
-			_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile((x+width+1) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile((x-width) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y+height) / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y-height) / tileSize, FLAT_TILE);
-			_map.setTile((x+(width *2)) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile((x-(width *2)) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
-			_map.setTile((x+(width *3)) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile((x-(width *3)) / tileSize, y / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, FLAT_TILE);
-			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, FLAT_TILE);
-			//fill in diagonals
-			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, FLAT_TILE);
-			_map.setTile((x-width) / tileSize, (y+height) / tileSize, FLAT_TILE);
-			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, FLAT_TILE);
-			_map.setTile((x-width) / tileSize, (y-height) / tileSize, FLAT_TILE);
-			
-			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, FLAT_TILE);
-			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, FLAT_TILE);
-			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, FLAT_TILE);
-			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, FLAT_TILE);
-			
-			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
-			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
-			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
-			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
+			if (this._facing == FlxObject.RIGHT)
+			{
+				_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x + width + 1) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x + width * 2) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x + width * 3) / tileSize, y / tileSize, FLAT_TILE);
+			}
+			else
+			{
+				_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x - width) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x - (width * 2)) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile((x - (width * 3)) / tileSize, y / tileSize, FLAT_TILE);
+			}
 			
 			kill();
 			FlxG.camera.shake(0.001,0.35);

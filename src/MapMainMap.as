@@ -5,8 +5,8 @@ package  {
 	
 	public class MapMainMap extends MapBase {
 		//Media content declarations
-		[Embed(source="./assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
-		[Embed(source="./assets/game_tilesheetA.png")] public var Img_MainGame:Class;
+		[Embed(source="../assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="../assets/game_tilesheetA.png")] public var Img_MainGame:Class;
 
 		
 		public function MapMainMap() {
