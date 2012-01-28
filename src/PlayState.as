@@ -139,7 +139,7 @@ package
 			map.addSpritesToLayerMainGame(onMapAddCallback);
 			
 			//stop trees by falling by initialising group before map creation
-			trees = new FlxGroup();
+		
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;			
 			
