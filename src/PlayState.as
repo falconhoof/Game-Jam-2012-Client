@@ -117,7 +117,7 @@ package
 			_littleGibs.makeParticles(ImgGibs,100,10,true,0.5);
 			
 			add(_littleGibs);
-			
+			trees = new FlxGroup();
 			//load first map
 			levelId = 0;
 			map=new MapMainMap();
@@ -264,15 +264,8 @@ package
 				}
 			}
 
-			//FlxG.collide(player, trees);
-			if(player.overlaps(trees))
-			{
-				//find the tree we overlap with
-			//	var treeToClimb:Tree = trees[0];
-				//climb to top
-			//	player.play("climbTree");
-				//stand on top
-			}
+			FlxG.overlap(player, trees, climbTree);
+			FlxG.collide(player, trees);
 			
 
 			//If we have hit the exit
@@ -298,6 +291,19 @@ package
 			super.update();
 		}
 		
+		public function climbTree(p:Player, treeToClimb:Tree):void
+		{
+			player.play("climbTree");
+			if (player.y > treeToClimb.y -5)
+			{
+				player.y = treeToClimb.y-64;
+				//player.x += 10;
+			}
+			//player.y = treeToClimb.y;
+		
+			
+		}
+
 		public override function draw():void
 		{
 			super.draw();
