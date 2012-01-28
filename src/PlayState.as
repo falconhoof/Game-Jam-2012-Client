@@ -144,7 +144,7 @@ package
 			
 			fgSunlightGradient = new FlxSprite(0, 0, FgSunlightGradientClass);
 			fgSunlightGradient.blend = "multiply";
-			fgSunlightGradient.alpha = 0.7;
+			fgSunlightGradient.alpha = 0.5;
 			add(fgSunlightGradient);
 			
 			
