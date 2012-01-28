@@ -88,7 +88,6 @@ package
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);*/
-
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
 			
