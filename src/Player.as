@@ -12,6 +12,8 @@ package
 		protected var _gibs:FlxEmitter;
 		protected var _map:FlxTilemap;
 		protected var tileSize:Number;
+		protected var spawnX:Number;
+		protected var spawnY:Number;
 		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
@@ -19,6 +21,8 @@ package
 		public function Player(X:int,Y:int)
 		{
 			super(X,Y);
+			spawnX = X;
+			spawnY = Y;
 			loadGraphic(ImgSpaceman,true,true,32);
 			_restart = 0;
 			
@@ -55,8 +59,8 @@ package
 			
 		public function respawn():void
 		{
-			x = 64;
-			y = 64;
+			x = spawnX;
+			y = spawnY;
 			alive = true;
 			exists = true;
 			visible = true;
@@ -79,7 +83,7 @@ package
 			if(!alive)
 			{
 				_restart += FlxG.elapsed;
-				if(_restart > 3)
+				if(_restart > 2)
 				{
 					respawn();
 				}
@@ -116,9 +120,14 @@ package
 				createTiles();
 				
 				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffd8eba2,0.35);
+				FlxG.camera.flash(0xffd8eba2,0.35);	
+			}
+			if(FlxG.keys.justPressed("E"))
+			{
+				createSpawn();
 				
-				
+				FlxG.camera.shake(0.005,0.35);
+				FlxG.camera.flash(0xffffeba2,0.35);	
 			}
 			
 			
@@ -238,6 +247,13 @@ package
 			FlxG.camera.shake(0.001,0.35);
 			FlxG.camera.flash(0xff0000a2,0.35);
 			
+		}
+		
+		public function createSpawn():void
+		{
+			spawnX = x;
+			spawnY = y;
+			kill();
 		}
 		
 		override public function kill():void
