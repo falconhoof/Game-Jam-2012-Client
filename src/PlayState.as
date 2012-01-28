@@ -138,7 +138,7 @@ package
 			/* add foreground stuff */
 			fgInverseVignette = new FlxSprite(0, 0, FgInverseVignetteClass);
 			
-			fgInverseVignette.blend = "multiply";
+			fgInverseVignette.blend = "screen";
 			
 			add(fgInverseVignette);
 			/*
