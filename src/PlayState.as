@@ -6,6 +6,7 @@ package
 	import flash.net.URLRequest;
 	
 	import org.flixel.*;
+	import org.osmf.layout.AbsoluteLayoutFacet;
 	
 	public class PlayState extends FlxState
 	{
@@ -78,6 +79,9 @@ package
 		protected var _littleGibs:FlxEmitter;
 		
 		public var tutorialTriggers : Array;
+		public var levels:Array;
+		
+		public var endLevel:Boolean=false;
 		
 		//Callback function to retrieve sprites from map
 		protected function onMapAddCallback(spr:FlxSprite):void
@@ -99,10 +103,90 @@ package
 			}
 		}
 		
+		public function OnStartLevel():void
+		{
+
+			
+			if (player!=null){
+				player.active=false;
+			}
+			if (collisionMap!=null){
+				collisionMap.active=false;
+			}
+			if (exit!=null){
+				exit.active=false;
+			}
+			
+			remove(collisionMap);
+			remove(player);
+			remove(exit);
+			for each(var t:TutorialTrigger in tutorialTriggers)
+			{
+				remove(t);
+			}
+			for each(var tree:Tree in trees)
+			{
+				remove(tree);
+			}
+			tutorialTriggers = new Array(); 
+			trees = new FlxGroup();
+			
+			map=levels[levelId];
+			map.decorateBackground(levelId);
+			
+			//for ( var i : Number = 0; i < map.backgroundSprites.length; i++) {
+				//var bgSprite : FlxSprite = map.backgroundSprites[i];
+				//add(bgSprite);
+			//}
+			map.addSpritesToLayerMainGame(onMapAddCallback);
+			
+			//stop trees by falling by initialising group before map creation
+			
+			add(map.layerMainGame);
+			collisionMap=map.layerMainGame;		
+			levelId++;
+			setupPlayer();
+			//endLevel=false;
+		}
+		
+		
+		public function OnEndLevel():void
+		{
+			//check to see if we have levels left
+			//if not go to exit screen(currently start screen)
+			//endLevel=true;
+			if (levelId>levels.length-1)
+			{
+				OnEndGame();
+			}
+			else
+			{
+				//FlxG.camera.fade(0xff000000,1,OnEndLevelFade);
+				OnStartLevel();
+			}
+		}
+		
+		public function OnEndLevelFade():void
+		{
+			FlxG.camera.fade(0xFFFFFFFF,1,OnStartFadeDone,true);
+		}
+		
+		public function OnStartFadeDone():void
+		{
+			OnStartLevel();
+		}
+		
+		public function OnEndGame():void
+		{
+			FlxG.switchState(new MenuState());	
+		}
+		
 		override public function create():void
 		{
+			
+			levels=new Array();
 			tutorialTriggers = new Array(); 
-
+			trees = new FlxGroup();
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
@@ -123,25 +207,21 @@ package
 			_littleGibs.makeParticles(ImgGibs,100,10,true,0.5);
 			
 			add(_littleGibs);
-			trees = new FlxGroup();
+			
 			//load first map
 			levelId = 0;
 			
 			//map=new MapMainMap();
+
+			map=new MapMainMap();
+			levels.push(map);
+			
 			map=new MapDavidMap();
+			levels.push(map);
 			
-			map.decorateBackground(levelId);
+			OnStartLevel();
 			
-			for ( var i : Number = 0; i < map.backgroundSprites.length; i++) {
-				var bgSprite : FlxSprite = map.backgroundSprites[i];
-				add(bgSprite);
-			}
-			map.addSpritesToLayerMainGame(onMapAddCallback);
 			
-			//stop trees by falling by initialising group before map creation
-		
-			add(map.layerMainGame);
-			collisionMap=map.layerMainGame;			
 			
 			
 			
@@ -175,7 +255,7 @@ package
 			*/
 			
 			
-			setupPlayer();
+			
 			
 			
 			/* add foreground stuff */
@@ -277,30 +357,33 @@ package
 		{
 			// Tilemaps can be collided just like any other FlxObject, and flixel
 			// automatically collides each individual tile with the object.
-			FlxG.collide(player, collisionMap);
-			FlxG.collide(trees, collisionMap, plantTreeFirmly);
+			//if (!endLevel){
+				FlxG.collide(player, collisionMap);
+				FlxG.collide(trees, collisionMap, plantTreeFirmly);
 			
-			for each(var t:TutorialTrigger in tutorialTriggers)
-			{
-				if (player.overlaps(t))
+				for each(var t:TutorialTrigger in tutorialTriggers)
 				{
-					t.ShowMessage();
+					if (player.overlaps(t))
+					{
+						t.ShowMessage();
+					}
+					else
+					{
+						t.HideMessage();
+					}
 				}
-				else
+			
+				FlxG.overlap(player, trees, climbTree);
+				FlxG.collide(player, trees);
+			
+			
+				//If we have hit the exit
+				if(player.overlaps(exit))
 				{
-					t.HideMessage();
+					//FlxG.switchState(new MenuState());
+					OnEndLevel();
 				}
-			}
-			
-			FlxG.overlap(player, trees, climbTree);
-			FlxG.collide(player, trees);
-			
-			
-			//If we have hit the exit
-			if(player.overlaps(exit))
-			{
-				FlxG.switchState(new MenuState());
-			}
+			//}
 			
 			/*
 			//TODO: For Create block to get tile location when you die!!!

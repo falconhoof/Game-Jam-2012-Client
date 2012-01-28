@@ -111,10 +111,11 @@ package
 				}
 				return;
 			}
-			
-			if (this.y>_map.height)
-			{
-				alive=false;	
+			if (_map!=null){
+				if (this.y>_map.height)
+				{
+					alive=false;	
+				}
 			}
 			
 			//MOVEMENT
