@@ -84,6 +84,8 @@ package
 		
 		override public function update():void
 		{
+			var stats : StatsTracker = (FlxG.state as PlayState).statsTracker;
+			
 			//game restart timer
 			if(!alive)
 			{
@@ -122,14 +124,19 @@ package
 				explode();
 				
 				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffd8eba2,0.35);	
+				FlxG.camera.flash(0xffd8eba2,0.35);	    
+				                
+				stats.increment("explosions");
+
 			}
 			if(FlxG.keys.justPressed("W"))
 			{
 				createTiles();
 				
 				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffd8eba2,0.35);	
+				FlxG.camera.flash(0xffd8eba2,0.35);	   
+                
+                stats.increment("platforms");
 			}
 			if(FlxG.keys.justPressed("E"))
 			{
@@ -137,6 +144,8 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffffeba2,0.35);	
+				
+				stats.increment("spawn points");
 			}
 			if(FlxG.keys.justPressed("R"))
 			{
@@ -144,6 +153,8 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0x11ff11a2,0.35);	
+
+				stats.increment("trees");
 			}
 			
 			if(velocity.y != 0)
@@ -278,7 +289,6 @@ package
 			visible = false;
 			velocity.make();
 			acceleration.make();
-			
 		}
 	}
 }

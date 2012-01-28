@@ -1,7 +1,7 @@
 package 
 {
 	import com.adobe.serialization.json.JSON;
-	
+	import org.flixel.*;
 	import flash.display.Sprite;
 	
 	
@@ -30,7 +30,6 @@ package
 		
 		public function increment(item : String, quantity : Number = 1) : void {
 			for ( var i : Number = 0; i < trackedItems.length; i++ ) {
-				var trackedItem : Object = trackedItems[i];
 				var trackedItem : Object = trackedItems[i];
 				var itemString : String = trackedItem.item as String;
 				if (trackedItem.item == item ) {
@@ -96,6 +95,15 @@ package
 			//trace ( JSON.encode(trackedItems)); 
 			
 			return JSON.encode(trackedItems);
+		}
+		
+		public function report() : void {
+			FlxG.log("Stats Output:");
+			for ( var i : Number = 0; i < trackedItems.length; i++) {
+				var item : Object = trackedItems[i];
+				FlxG.log("     ["+item.item+"]["+item.value+"]");
+				
+			}
 		}
 	}
 }

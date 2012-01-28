@@ -41,6 +41,10 @@ package
 		private var mcLoader:Loader = new Loader();
 		private var movieEffects : MovieClip;
 		
+		// stats tracking
+		public var statsTracker : StatsTracker;
+		private var loadJSONData : JSONLoad;
+
 		
 		// Some static constants for the size of the tilemap tiles
 		private const TILE_WIDTH:uint = 16;
@@ -240,6 +244,13 @@ package
 			
 			helperTxt = new FlxText(12 + autoAltBtn.width*2, FlxG.height - 30, 150, "Click to place tiles\nShift-Click to remove tiles\nArrow keys to move");
 			add(helperTxt);*/
+		
+			// initialise stats
+			statsTracker  = new StatsTracker();
+			statsTracker.trackItem("explosions");
+			statsTracker.trackItem("platforms");
+			statsTracker.trackItem("spawn points");
+			statsTracker.trackItem("trees");
 		}
 		
 		override public function update():void
