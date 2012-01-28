@@ -39,6 +39,7 @@ package
 		
 		// movieclip
 		private var mcLoader:Loader = new Loader();
+		private var movieEffects : MovieClip;
 		
 		
 		// Some static constants for the size of the tilemap tiles
