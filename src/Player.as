@@ -10,6 +10,9 @@ package
 		protected var _restart:Number;
 		protected var _gibs:FlxEmitter;
 		
+		
+		
+		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
