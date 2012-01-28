@@ -1,6 +1,7 @@
 package
 {
 	import flash.display.BlendMode;
+	
 	import org.flixel.*;
 
 	public class PlayState extends FlxState
@@ -29,11 +30,16 @@ package
 		// The FlxTilemap we're using
 		private var collisionMap:FlxTilemap;
 		
+		//This is the current map
+		private var map:MapBase;
+		
 		// Box to show the user where they're placing stuff
 		private var highlightBox:FlxObject;
 		
 		// Player modified from "Mode" demo
 		private var player:Player;
+		
+		private var exit:Exit;
 		
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
@@ -42,6 +48,18 @@ package
 		private var helperTxt:FlxText;
 		
 		protected var _littleGibs:FlxEmitter;
+		
+		//Callback function to retrieve sprites from map
+		protected function onMapAddCallback(spr:FlxSprite):void
+		{
+			if(spr is Player) {
+				player = spr as Player;
+			}
+			else if (spr is Exit)
+			{
+				exit=spr as Exit;
+			}
+		}
 		
 		override public function create():void
 		{
@@ -58,8 +76,14 @@ package
 			
 			add(_littleGibs);
 			
+			//load first map
+			map=new MapMainMap();
+			map.addSpritesToLayerMainGame(onMapAddCallback);
+			add(map.layerMainGame);
+			collisionMap=map.layerMainGame;			
+			
 			// Creates a new tilemap with no arguments
-			collisionMap = new FlxTilemap();
+			//collisionMap = new FlxTilemap();
 			
 			/*
 			* FlxTilemaps are created using strings of comma seperated values (csv)
@@ -79,13 +103,14 @@ package
 			*/
 			
 			// Initializes the map using the generated string, the tile images, and the tile size
+			/*
 			collisionMap.loadMap(new default_auto(), auto_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.AUTO);
 			add(collisionMap);
 			
 			highlightBox = new FlxObject(0, 0, TILE_WIDTH, TILE_HEIGHT);
-			
+			*/
 			setupPlayer();
-			
+			/*
 			// When switching between modes here, the map is reloaded with it's own data, so the positions of tiles are kept the same
 			// Notice that different tilesets are used when the auto mode is switched
 			autoAltBtn = new FlxButton(4, FlxG.height - 24, "AUTO", function():void
@@ -145,7 +170,7 @@ package
 			add(quitBtn);
 			
 			helperTxt = new FlxText(12 + autoAltBtn.width*2, FlxG.height - 30, 150, "Click to place tiles\nShift-Click to remove tiles\nArrow keys to move");
-			add(helperTxt);
+			add(helperTxt);*/
 		}
 		
 		override public function update():void
@@ -153,7 +178,15 @@ package
 			// Tilemaps can be collided just like any other FlxObject, and flixel
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
+			//If we have hit the exit
+			if(player.overlaps(exit))
+			{
+				FlxG.switchState(new MenuState());
+			}
 			
+			/*
+			//TODO: For Create block to get tile location when you die!!!
+			//Change mouse to player position, move this into player
 			highlightBox.x = Math.floor(FlxG.mouse.x / TILE_WIDTH) * TILE_WIDTH;
 			highlightBox.y = Math.floor(FlxG.mouse.y / TILE_HEIGHT) * TILE_HEIGHT;
 			
@@ -163,29 +196,22 @@ package
 				// Setting a tile to 0 removes it, and setting it to anything else will place a tile.
 				// If auto map is on, the map will automatically update all surrounding tiles.
 				collisionMap.setTile(FlxG.mouse.x / TILE_WIDTH, FlxG.mouse.y / TILE_HEIGHT, FlxG.keys.SHIFT?0:1);
-			}
+			}*/
 			
-			updatePlayer();
 			super.update();
 		}
 		
 		public override function draw():void
 		{
 			super.draw();
-			highlightBox.drawDebug();
 		}
 		
 		private function setupPlayer():void
 		{
-			player = new Player(64, 220);
+			//player = new Player(64, 220);
 			player.setTileMap(collisionMap);
 			player.setGibEmitter(_littleGibs);
-			add(player);
-		}
-		
-		private function updatePlayer():void
-		{
-			//player.update()
+			//add(player);
 		}
 		
 		private function wrap(obj:FlxObject):void

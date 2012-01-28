@@ -148,19 +148,19 @@ package
 		
 		public function explode():void
 		{
-			_map.setTile(x / 16, y / 16, 0);
-			_map.setTile((x+width+1) / 16, y / 16, 0);
-			_map.setTile((x-width) / 16, y / 16, 0);
-			_map.setTile(x / 16, (y+height) / 16, 0);
-			_map.setTile(x / 16, (y-height) / 16, 0);
-			_map.setTile((x+(width *2)) / 16, y / 16, 0);
-			_map.setTile((x-(width *2)) / 16, y / 16, 0);
-			_map.setTile(x / 16, (y+(height*2)) / 16, 0);
-			_map.setTile(x / 16, (y-(height*2)) / 16, 0);
-			_map.setTile((x+(width *3)) / 16, y / 16, 0);
-			_map.setTile((x-(width *3)) / 16, y / 16, 0);
-			_map.setTile(x / 16, (y+(height*3)) / 16, 0);
-			_map.setTile(x / 16, (y-(height*3)) / 16, 0);
+			_map.setTile(x / 32, y / 32, 0);
+			_map.setTile((x+width+1) / 32, y / 32, 0);
+			_map.setTile((x-width) / 32, y / 32, 0);
+			_map.setTile(x / 32, (y+height) / 32, 0);
+			_map.setTile(x / 32, (y-height) / 32, 0);
+			_map.setTile((x+(width *2)) / 32, y / 32, 0);
+			_map.setTile((x-(width *2)) / 32, y / 32, 0);
+			_map.setTile(x / 32, (y+(height*2)) / 32, 0);
+			_map.setTile(x / 32, (y-(height*2)) / 32, 0);
+			_map.setTile((x+(width *3)) / 32, y / 32, 0);
+			_map.setTile((x-(width *3)) / 32, y / 32, 0);
+			_map.setTile(x / 32, (y+(height*3)) / 32, 0);
+			_map.setTile(x / 32, (y-(height*3)) / 32, 0);
 			kill();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
