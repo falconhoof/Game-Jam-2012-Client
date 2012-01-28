@@ -231,6 +231,7 @@ package
 				_gibs.at(this);
 				_gibs.start(true,5,0,50);
 			}
+			(FlxG.state as PlayState).killTrees(x,y);
 		}
 		
 		public function createTiles():void

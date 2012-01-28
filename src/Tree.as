@@ -4,14 +4,14 @@ package
 	
 	public class Tree extends FlxSprite
 	{
-		[Embed(source="../assets/charAnim.png")] protected var ImgSpaceman:Class;
-		
+		[Embed(source="../assets/main_BGtree6.png")] protected var ImgTree:Class;
+		public var roots:FlxPoint;
 		
 		public function Tree(X:Number=0, Y:Number=0)
 		{
 			super(X, Y);
-			loadGraphic(ImgSpaceman,true,true,32, 128);
-			
+			loadGraphic(ImgTree,true,true,32, 128);
+			roots = new FlxPoint(X,Y+128);
 			
 			//bounding box tweaks
 			width = 32;
@@ -19,9 +19,9 @@ package
 			offset.x = 1;
 			offset.y = 1;
 			
-			immovable = true;
+			//immovable = true;
 			
-			
+			acceleration.y = 420;
 			
 			//animations
 			addAnimation("idle", [0]);

@@ -67,7 +67,8 @@ package
 		
 		private var exit:Exit;
 		protected var trees:FlxGroup;
-		
+		protected var explosions:FlxGroup;
+
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
 		private var resetBtn:FlxButton;
@@ -137,6 +138,7 @@ package
 			
 			
 			trees = new FlxGroup();
+			explosions = new FlxGroup();
 			// Creates a new tilemap with no arguments
 			//collisionMap = new FlxTilemap();
 			
@@ -258,7 +260,7 @@ package
 			// Tilemaps can be collided just like any other FlxObject, and flixel
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
-			
+			FlxG.collide(trees, collisionMap, plantTreeFirmly);
 			
 			for each(var t:TutorialTrigger in tutorialTriggers)
 			{
@@ -305,11 +307,30 @@ package
 			if (player.y > treeToClimb.y -5)
 			{
 				player.y = treeToClimb.y-64;
-				//player.x += 10;
+				
 			}
-			//player.y = treeToClimb.y;
+		}
+
+		public function plantTreeFirmly(tree:Tree, m:FlxTilemap):void
+		{
+			tree.immovable = true;
+			tree.acceleration.y = 0;
+		
+		}
+		
+		public function killTrees(X:Number, Y:Number):void
+		{
+			var exp:Explosion;
 			
-			
+			exp = new Explosion(X-75,Y-75);
+			explosions.add(exp);
+			FlxG.overlap(explosions, trees, killThisTree);
+		}
+
+		
+		public function killThisTree(Exp:Explosion, dieTree:Tree):void
+		{
+			dieTree.kill();
 		}
 		
 		public override function draw():void
