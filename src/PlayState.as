@@ -21,7 +21,7 @@ package
 		[Embed(source = '../assets/default_empty.txt', mimeType = 'application/octet-stream')]private static var default_empty:Class;
 
 		[Embed(source="../assets/spaceman.png")] private static var ImgSpaceman:Class;
-		[Embed(source="../assets/spaceman.png")] private static var ImgGibs:Class;
+		[Embed(source="../assets/gib.png")] private static var ImgGibs:Class;
 		
 		// Some static constants for the size of the tilemap tiles
 		private const TILE_WIDTH:uint = 16;
