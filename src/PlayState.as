@@ -26,9 +26,11 @@ package
 		
 		// graphics
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
+		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
+		private var fgSunlightGradient : FlxSprite;
 		
 		
 		// Some static constants for the size of the tilemap tiles
@@ -137,10 +139,15 @@ package
 			
 			/* add foreground stuff */
 			fgInverseVignette = new FlxSprite(0, 0, FgInverseVignetteClass);
-			
 			fgInverseVignette.blend = "screen";
-			
 			add(fgInverseVignette);
+			
+			fgSunlightGradient = new FlxSprite(0, 0, FgSunlightGradientClass);
+			fgSunlightGradient.blend = "multiply";
+			fgSunlightGradient.alpha = 0.7;
+			add(fgSunlightGradient);
+			
+			
 			/*
 			// When switching between modes here, the map is reloaded with it's own data, so the positions of tiles are kept the same
 			// Notice that different tilesets are used when the auto mode is switched
