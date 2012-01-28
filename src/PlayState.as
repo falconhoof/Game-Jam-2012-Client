@@ -1,6 +1,9 @@
 package
 {
 	import flash.display.BlendMode;
+	import flash.display.Loader;
+	import flash.display.MovieClip;
+	import flash.net.URLRequest;
 	
 	import org.flixel.*;
 
@@ -27,10 +30,15 @@ package
 		// graphics
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
 		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
+		[Embed(source="../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
 		private var fgSunlightGradient : FlxSprite;
+		private var fgLetterbox : FlxSprite;
+		
+		// movieclip
+		private var mcLoader:Loader = new Loader();
 		
 		
 		// Some static constants for the size of the tilemap tiles
@@ -62,6 +70,8 @@ package
 		
 		protected var _littleGibs:FlxEmitter;
 		
+		public var tutorialTriggers : Array;
+		
 		//Callback function to retrieve sprites from map
 		protected function onMapAddCallback(spr:FlxSprite):void
 		{
@@ -72,11 +82,16 @@ package
 			{
 				exit=spr as Exit;
 			}
+			else if(spr is TutorialTrigger)
+			{
+				tutorialTriggers.push(spr as TutorialTrigger);
+			}
 		}
 		
 		override public function create():void
 		{
 			tutorialTriggers = new Array(); 
+			tutorialTriggers = new Array();
 
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
@@ -159,6 +174,9 @@ package
 			fgSunlightGradient.alpha = 0.5;
 			add(fgSunlightGradient);
 			
+			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
+			add(fgLetterbox);
+			
 			
 			/*
 			// When switching between modes here, the map is reloaded with it's own data, so the positions of tiles are kept the same
@@ -228,6 +246,18 @@ package
 			// Tilemaps can be collided just like any other FlxObject, and flixel
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
+			
+			for each(var t:TutorialTrigger in tutorialTriggers)
+			{
+				if (player.overlaps(t))
+				{
+					t.ShowMessage();
+				}
+				else
+				{
+					t.HideMessage();
+				}
+			}
 			//If we have hit the exit
 			if(player.overlaps(exit))
 			{
