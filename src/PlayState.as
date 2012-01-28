@@ -122,7 +122,9 @@ package
 			trees = new FlxGroup();
 			//load first map
 			levelId = 0;
+			
 			map=new MapMainMap();
+			//map=new MapDavidMap();
 			
 			map.decorateBackground(levelId);
 			
@@ -176,10 +178,12 @@ package
 			fgInverseVignette.blend = "screen";
 			add(fgInverseVignette);
 			
-			fgSunlightGradient = new FlxSprite(0, 0, FgSunlightGradientClass);
+			/*fgSunlightGradient = new FlxSprite(0, 0, FgSunlightGradientClass);
 			fgSunlightGradient.blend = "multiply";
 			fgSunlightGradient.alpha = 0.5;
-			add(fgSunlightGradient);
+			add(fgSunlightGradient);*/
+			
+			
 			
 			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
 			add(fgLetterbox);
@@ -246,7 +250,16 @@ package
 			
 			helperTxt = new FlxText(12 + autoAltBtn.width*2, FlxG.height - 30, 150, "Click to place tiles\nShift-Click to remove tiles\nArrow keys to move");
 			add(helperTxt);*/
-		
+			
+			// camera tint
+			
+			var cam:FlxCamera = new FlxCamera(0,0, FlxG.width, FlxG.height); // we put the first one in the top left corner
+			// this sets the limits of where the camera goes so that it doesn't show what's outside of the tilemap
+			cam.setBounds(0,0,FlxG.width, FlxG.height);
+			cam.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
+			FlxG.addCamera(cam);
+			
+			
 			// initialise stats
 			statsTracker  = new StatsTracker();
 			statsTracker.trackItem("explosions");
