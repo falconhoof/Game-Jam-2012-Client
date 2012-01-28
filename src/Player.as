@@ -49,6 +49,7 @@ package
 			addAnimation("idle", [0]);
 			addAnimation("run", [0, 1, 2, 3,4,5,6], 12);	
 			addAnimation("jump", [2]);
+			addAnimation("climbTree", [2,0,2,0,2,0,2,0], 6);
 			
 		}
 		
@@ -138,6 +139,13 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffffeba2,0.35);	
+			}
+			if(FlxG.keys.justPressed("R"))
+			{
+				createTree();
+				
+				FlxG.camera.shake(0.005,0.35);
+				FlxG.camera.flash(0x11ff11a2,0.35);	
 			}
 			
 			if(velocity.y != 0)
@@ -245,6 +253,19 @@ package
 		{
 			spawnX = x;
 			spawnY = y;
+			kill();
+		}
+		
+		public function createTree():void
+		{
+			var tree:Tree;
+			tree = new Tree(x, y-96);
+			_map.setTile(x,y-64,FLAT_TILE);
+			_map.setTile(x,y-32,FLAT_TILE);
+			_map.setTile(x,y,FLAT_TILE);
+			_map.setTile(x,y-96,FLAT_TILE);
+			(FlxG.state as PlayState).addTree(tree);
+			FlxG.state.add(tree);
 			kill();
 		}
 		

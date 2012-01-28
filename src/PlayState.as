@@ -62,6 +62,7 @@ package
 		private var player:Player;
 		
 		private var exit:Exit;
+		protected var trees:FlxGroup;
 		
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
@@ -133,6 +134,8 @@ package
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;			
 			
+			
+			trees = new FlxGroup();
 			// Creates a new tilemap with no arguments
 			//collisionMap = new FlxTilemap();
 			
@@ -248,6 +251,7 @@ package
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
 			
+
 			for each(var t:TutorialTrigger in tutorialTriggers)
 			{
 				if (player.overlaps(t))
@@ -259,6 +263,18 @@ package
 					t.HideMessage();
 				}
 			}
+
+			//FlxG.collide(player, trees);
+			if(player.overlaps(trees))
+			{
+				//find the tree we overlap with
+			//	var treeToClimb:Tree = trees[0];
+				//climb to top
+			//	player.play("climbTree");
+				//stand on top
+			}
+			
+
 			//If we have hit the exit
 			if(player.overlaps(exit))
 			{
@@ -293,6 +309,11 @@ package
 			player.setTileMap(collisionMap);
 			player.setGibEmitter(_littleGibs);
 			//add(player);
+		}
+		
+		public function addTree(tree:Tree):void
+		{
+			trees.add(tree);
 		}
 		
 		private function wrap(obj:FlxObject):void
