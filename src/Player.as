@@ -22,7 +22,7 @@ package
 		{
 			super(X,Y);
 			spawnX = X;
-			spawnY = Y;
+			spawnY = Y-50;
 			loadGraphic(ImgSpaceman,true,true,32);
 			_restart = 0;
 			
