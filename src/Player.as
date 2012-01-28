@@ -125,6 +125,9 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffd8eba2,0.35);	
+				
+				var stats : StatsTracker = (FlxG.state as PlayState).statsTracker;
+				stats.increment("explosions");
 			}
 			if(FlxG.keys.justPressed("W"))
 			{
@@ -132,6 +135,9 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffd8eba2,0.35);	
+				
+				var stats : StatsTracker = (FlxG.state as PlayState).statsTracker;
+				stats.increment("platforms");
 			}
 			if(FlxG.keys.justPressed("E"))
 			{
@@ -139,6 +145,9 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffffeba2,0.35);	
+				
+				var stats : StatsTracker = (FlxG.state as PlayState).statsTracker;
+				stats.increment("spawn points");
 			}
 			if(FlxG.keys.justPressed("R"))
 			{
@@ -146,6 +155,8 @@ package
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0x11ff11a2,0.35);	
+				var stats : StatsTracker = (FlxG.state as PlayState).statsTracker;
+				stats.increment("trees");
 			}
 			
 			if(velocity.y != 0)

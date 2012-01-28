@@ -9,7 +9,7 @@ package
 	
 	public class JSONLoad extends Sprite 
 	{
-		private callback : function;
+		private var callback : Function;
 		
 		public function JSONLoad(url : String, cback : Function):void 
 		{
