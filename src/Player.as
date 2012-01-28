@@ -6,7 +6,7 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../assets/charIdleR.png")] protected var ImgSpaceman:Class;
+		[Embed(source="../assets/char_walkR.png")] protected var ImgSpaceman:Class;
 		
 		
 		protected var _restart:Number;
@@ -52,7 +52,7 @@ package
 		*/	
 			//animations
 			addAnimation("idle", [0]);
-			addAnimation("run", [0, 1, 2, 3,4,5,6], 12);	
+			addAnimation("run", [0, 1, 2, 3,4,5], 12);	
 			addAnimation("jump", [2]);
 			addAnimation("climbTree", [2,0,2,0,2,0,2,0], 6);
 			
