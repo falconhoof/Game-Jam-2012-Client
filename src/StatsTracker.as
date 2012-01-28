@@ -1,8 +1,10 @@
 package 
 {
 	import com.adobe.serialization.json.JSON;
-	import org.flixel.*;
+	
 	import flash.display.Sprite;
+	
+	import org.flixel.*;
 	
 	
 	public class StatsTracker extends Sprite
@@ -104,6 +106,11 @@ package
 				FlxG.log("     ["+item.item+"]["+item.value+"]");
 				
 			}
+		}
+		
+		public function submitStats() : void {
+			var submitVars : String = serialize();
+			var url : String = "http://falconhoof.heroku.com/api/v1/stats/";
 		}
 	}
 }
