@@ -1,7 +1,3 @@
-# Introduction
-
-Blah.
-
 # Prerequisites
 
 * [Adobe Flash Builder](http://www.adobe.com/products/flash-builder.html) (60-day free trial available) or similar.
