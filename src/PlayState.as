@@ -30,10 +30,12 @@ package
 		// graphics
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
 		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
+		[Embed(source="../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
 		private var fgSunlightGradient : FlxSprite;
+		private var fgLetterbox : FlxSprite;
 		
 		// movieclip
 		private var mcLoader:Loader = new Loader();
@@ -89,6 +91,7 @@ package
 		
 		override public function create():void
 		{
+<<<<<<< HEAD
 			tutorialTriggers = new Array();
 
 			/*mcLoader = new Loader();
@@ -96,6 +99,13 @@ package
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);
 			*/
+=======
+			/*mcLoader = new Loader();
+			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
+			mcLoader.load(url);
+			FlxG.stage.addChild(mcLoader);*/
+			
+>>>>>>> commented out video temporarily and added letterbox
 				
 //put Jon's movie clip fx on top
 			
@@ -169,6 +179,9 @@ package
 			fgSunlightGradient.blend = "multiply";
 			fgSunlightGradient.alpha = 0.5;
 			add(fgSunlightGradient);
+			
+			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
+			add(fgLetterbox);
 			
 			
 			/*
