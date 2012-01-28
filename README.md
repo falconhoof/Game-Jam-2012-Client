@@ -25,3 +25,7 @@ Blah.
 * Click Finish
 
 * Right click on the main.as file and select 'Set as Default Application'
+
+# Contribute
+
+Contributions are welcomed! [Fork our repo](http://help.github.com/fork-a-repo/), [submit a pull request](http://help.github.com/send-pull-requests/) and we'll take it from there.
