@@ -91,7 +91,6 @@ package
 		
 		override public function create():void
 		{
-<<<<<<< HEAD
 			tutorialTriggers = new Array();
 
 			/*mcLoader = new Loader();
@@ -99,13 +98,12 @@ package
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);
 			*/
-=======
+			
 			/*mcLoader = new Loader();
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
 			FlxG.stage.addChild(mcLoader);*/
 			
->>>>>>> commented out video temporarily and added letterbox
 				
 //put Jon's movie clip fx on top
 			
