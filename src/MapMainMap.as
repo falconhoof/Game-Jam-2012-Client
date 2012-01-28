@@ -17,8 +17,6 @@ package  {
 
 			layerMainGame = new FlxTilemap();
 			layerMainGame.loadMap(new CSV_MainGame, Img_MainGame,32,32);
-
-
 			layerMainGame.x = 0;
 			layerMainGame.y = 0;
 			layerMainGame.scrollFactor.x = 1.000000;
@@ -32,19 +30,17 @@ package  {
 			boundsMaxX = 1280;
 			boundsMaxY = 704;
 		}
-		
-		
-		
+
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
-			obj = new Player(64, 576);;
+			obj = new Exit(1184, 352);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Exit(1120, 640);;
+			obj = new Player(64, 352);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
