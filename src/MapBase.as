@@ -41,7 +41,7 @@ package  {
 		/*
 		*  Added by DF - pass in level Id and this will create appropriate background images.
 		*/
-		private function decorateBackground(levelId : Number) : void {
+		public function decorateBackground(levelId : Number) : void {
 			backgroundSprites = new Array();
 			
 			//sky parallax layer.

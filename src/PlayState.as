@@ -33,6 +33,9 @@ package
 		//This is the current map
 		private var map:MapBase;
 		
+		// We need to know which level it is for logic
+	 	private var levelId : Number;
+		
 		// Box to show the user where they're placing stuff
 		private var highlightBox:FlxObject;
 		
@@ -77,8 +80,18 @@ package
 			add(_littleGibs);
 			
 			//load first map
+			levelId = 0;
 			map=new MapMainMap();
+			
+			map.decorateBackground(levelId);
+			
+			for ( var i : Number = 0; i < map.backgroundSprites.length; i++) {
+				var bgSprite : FlxSprite = map.backgroundSprites[i];
+				add(bgSprite);
+			}
 			map.addSpritesToLayerMainGame(onMapAddCallback);
+			
+			
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;			
 			
