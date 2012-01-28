@@ -42,7 +42,7 @@ package
 			
 			//basic player physics
 			runSpeed = 160;
-			drag.x = runSpeed*10;
+			drag.x = runSpeed*15;
 			acceleration.y = 2000;
 			maxVelocity.x = runSpeed;
 			jumpSpeed = 500;
