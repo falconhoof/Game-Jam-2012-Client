@@ -98,13 +98,13 @@ package
 		{
 			tutorialTriggers = new Array(); 
 
-			mcLoader = new Loader(); 
+			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
-			//FlxG.stage.addChild(mcLoader);
+			FlxG.stage.addChild(mcLoader);
 			mcLoader.y = 100;	
 			mcLoader.blendMode = "screen";
-			mcLoader.scaleX = mcLoader.scaleY = 2;
+			mcLoader.scaleX = mcLoader.scaleY = 2;*/
 			
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
