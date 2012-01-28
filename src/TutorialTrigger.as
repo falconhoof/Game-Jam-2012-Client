@@ -11,7 +11,7 @@ package
 		
 		public function TutorialTrigger(X:int,Y:int)
 		{
-			super(X,Y);
+			super(X,Y+16);
 			loadGraphic(ImgTutTrigger,true,true,32,64);
 		}
 		
