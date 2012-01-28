@@ -70,6 +70,7 @@ package
 		protected var trees:FlxGroup;
 		public var canopies:FlxGroup;
 		protected var explosions:FlxGroup;
+		protected var pickups:FlxGroup;
 
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
@@ -103,6 +104,10 @@ package
 				trees.add(spr as Tree);
 				(spr as Tree).play("idle");
 			}
+			else if (spr is Pickup)
+			{
+				pickups.add(spr as Pickup);
+			}
 		}
 		
 		public function OnStartLevel():void
@@ -132,8 +137,13 @@ package
 			}
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
+<<<<<<< HEAD
 			canopies = new FlxGroup();
 			explosions = new FlxGroup();
+=======
+			pickups=new FlxGroup();
+			
+>>>>>>> Initial stab at pickup, partial update so I can test with player movement
 			map=levels[levelId];
 			map.decorateBackground(levelId);
 			
@@ -191,6 +201,7 @@ package
 			levels=new Array();
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
+			pickups=new FlxGroup();
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
@@ -381,6 +392,17 @@ package
 			
 				FlxG.overlap(player, trees, climbTree);
 				FlxG.collide(player, trees);
+				
+				//we need check with each individual 
+				//sprites
+				for each(var p:Pickup in pickups)
+				{
+					if (player.overlaps(p))
+					{
+						p.visible=false;
+						//add to pick up score
+					}
+				}
 			
 			
 				//If we have hit the exit

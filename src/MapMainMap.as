@@ -4,7 +4,7 @@ package  {
 	public class MapMainMap extends MapBase {
 		//Media content declarations
 
-		[Embed(source="../assets/MapCSV_MainMap_MainGame32.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="../assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
 		[Embed(source="../assets/game_tilesheetA32wide.png")] public var Img_MainGame:Class;
 
 		
@@ -34,7 +34,13 @@ package  {
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
-			obj = new Exit(100, 328);;
+			obj = new Exit(1192, 328);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);
+			obj = new Player(64, 272);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
@@ -46,13 +52,13 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new CreateTutorialTrigger(576, 272);;
+			obj = new DestoryTutorialTrigger(608, 272);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Player(64, 272);;
+			obj = new Pickup(448, 320);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
