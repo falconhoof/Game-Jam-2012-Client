@@ -101,7 +101,7 @@ package
 			FlxG.stage.addChild(mcLoader);
 			mcLoader.y = 100;	
 			mcLoader.blendMode = "screen";
-			
+			mcLoader.scaleX = mcLoader.scaleY = 2;
 
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
