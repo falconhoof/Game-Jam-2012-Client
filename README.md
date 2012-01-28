@@ -4,7 +4,7 @@ Blah.
 
 # Prerequisites
 
-* [Adobe Flash Builder](http://www.adobe.com/products/flash-builder.html) (60-day free trial available) or similar e.g.
+* [Adobe Flash Builder](http://www.adobe.com/products/flash-builder.html) (60-day free trial available) or similar.
 * [as3corelib](https://github.com/mikechambers/as3corelib) -  an ActionScript 3 Library that contains a number of classes and utilities for working with ActionScript? 3. These include classes for MD5 and SHA 1 hashing, Image encoders, and JSON serialization as well as general String, Number and Date APIs.
 * [Flixel](https://github.com/AdamAtomic/flixel) - a free Actionscript (Flash) library that I distilled from a variety of Flash games that I've worked on over the last couple years, including Gravity Hook, Fathom and Canabalt.  It's primary function is to provide some useful base classes that you can extend to make your own game objects.
 
