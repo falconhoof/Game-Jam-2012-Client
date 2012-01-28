@@ -123,8 +123,8 @@ package
 			//load first map
 			levelId = 0;
 			
-			map=new MapMainMap();
-			//map=new MapDavidMap();
+			//map=new MapMainMap();
+			map=new MapDavidMap();
 			
 			map.decorateBackground(levelId);
 			
@@ -253,11 +253,11 @@ package
 			
 			// camera tint
 			
-			var cam:FlxCamera = new FlxCamera(0,0, FlxG.width, FlxG.height); // we put the first one in the top left corner
+			//var cam:FlxCamera = new FlxCamera(0,0, FlxG.width, FlxG.height); // we put the first one in the top left corner
 			// this sets the limits of where the camera goes so that it doesn't show what's outside of the tilemap
-			cam.setBounds(0,0,FlxG.width, FlxG.height);
-			cam.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
-			FlxG.addCamera(cam);
+			//cam.setBounds(0,0,FlxG.width, FlxG.height);
+			FlxG.camera.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
+			//FlxG.addCamera(cam);
 			
 			
 			// initialise stats

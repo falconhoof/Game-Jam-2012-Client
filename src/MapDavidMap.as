@@ -5,8 +5,9 @@ package  {
 	
 	public class MapDavidMap extends MapBase {
 		//Media content declarations
-		[Embed(source="../assets/MapCSV_DavidMap_NewLayer.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="../assets/MapCSV_DavidMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
 		[Embed(source="../assets/game_tilesheetA32wide.png")] public var Img_MainGame:Class;
+		
 		
 		public function MapDavidMap() {
 			
@@ -39,7 +40,19 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Exit(415, 290);;
+			obj = new Tree(987, 317);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);
+			obj = new Exit(1262, 96);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);
+			obj = new Exit(1254, 198);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
