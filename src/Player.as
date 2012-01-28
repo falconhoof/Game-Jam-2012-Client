@@ -11,6 +11,7 @@ package
 		protected var _restart:Number;
 		protected var _gibs:FlxEmitter;
 		protected var _map:FlxTilemap;
+		protected var tileSize:Number;
 		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
@@ -22,7 +23,7 @@ package
 			_restart = 0;
 			
 			//bounding box tweaks
-			width = 32;
+			width = 30;
 			height = 32;
 			offset.x = 1;
 			offset.y = 1;
@@ -44,6 +45,7 @@ package
 		public function setTileMap(collisionMap:FlxTilemap):void
 		{
 			_map = collisionMap;
+			tileSize = 32;
 		}
 		
 		public function setGibEmitter(Gibs:FlxEmitter):void
@@ -102,9 +104,16 @@ package
 				y -= 1;
 				velocity.y = -200;
 			}
-			if(FlxG.keys.justPressed("SPACE"))
+			if(FlxG.keys.justPressed("Q"))
 			{
 				explode();
+				
+				FlxG.camera.shake(0.005,0.35);
+				FlxG.camera.flash(0xffd8eba2,0.35);	
+			}
+			if(FlxG.keys.justPressed("W"))
+			{
+				createTiles();
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffd8eba2,0.35);
@@ -148,22 +157,86 @@ package
 		
 		public function explode():void
 		{
-			_map.setTile(x / 32, y / 32, 0);
-			_map.setTile((x+width+1) / 32, y / 32, 0);
-			_map.setTile((x-width) / 32, y / 32, 0);
-			_map.setTile(x / 32, (y+height) / 32, 0);
-			_map.setTile(x / 32, (y-height) / 32, 0);
-			_map.setTile((x+(width *2)) / 32, y / 32, 0);
-			_map.setTile((x-(width *2)) / 32, y / 32, 0);
-			_map.setTile(x / 32, (y+(height*2)) / 32, 0);
-			_map.setTile(x / 32, (y-(height*2)) / 32, 0);
-			_map.setTile((x+(width *3)) / 32, y / 32, 0);
-			_map.setTile((x-(width *3)) / 32, y / 32, 0);
-			_map.setTile(x / 32, (y+(height*3)) / 32, 0);
-			_map.setTile(x / 32, (y-(height*3)) / 32, 0);
+			_map.setTile(x / tileSize, y / tileSize, 0);
+			//one to each side
+			_map.setTile((x+width+1) / tileSize, y / tileSize, 0);
+			_map.setTile((x-width) / tileSize, y / tileSize, 0);
+			//one up one down
+			_map.setTile(x / tileSize, (y+height) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-height) / tileSize, 0);
+			//second on each side
+			_map.setTile((x+(width *2)) / tileSize, y / tileSize, 0);
+			_map.setTile((x-(width *2)) / tileSize, y / tileSize, 0);
+			//second up and down
+			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, 0);
+			//fill in diagonals
+			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, 0);
+			_map.setTile((x-width) / tileSize, (y+height) / tileSize, 0);
+			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, 0);
+			_map.setTile((x-width) / tileSize, (y-height) / tileSize, 0);
+			
+			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, 0);
+			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, 0);
+			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, 0);
+			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, 0);
+			
+			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, 0);
+			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, 0);
+			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, 0);
+			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, 0);
+			
+			
+			//third on each side
+			_map.setTile((x+(width *3)) / tileSize, y / tileSize, 0);
+			_map.setTile((x-(width *3)) / tileSize, y / tileSize, 0);
+			//third up and down
+			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, 0);
 			kill();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
+			if(_gibs != null)
+			{
+				_gibs.at(this);
+				_gibs.start(true,5,0,50);
+			}
+		}
+		
+		public function createTiles():void
+		{
+			_map.setTile(x / tileSize, y / tileSize, 1);
+			_map.setTile((x+width+1) / tileSize, y / tileSize, 1);
+			_map.setTile((x-width) / tileSize, y / tileSize, 1);
+			_map.setTile(x / tileSize, (y+height) / tileSize, 1);
+			_map.setTile(x / tileSize, (y-height) / tileSize, 1);
+			_map.setTile((x+(width *2)) / tileSize, y / tileSize, 1);
+			_map.setTile((x-(width *2)) / tileSize, y / tileSize, 1);
+			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, 1);
+			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, 1);
+			_map.setTile((x+(width *3)) / tileSize, y / tileSize, 1);
+			_map.setTile((x-(width *3)) / tileSize, y / tileSize, 1);
+			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, 1);
+			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, 1);
+			//fill in diagonals
+			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, 1);
+			_map.setTile((x-width) / tileSize, (y+height) / tileSize, 1);
+			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, 1);
+			_map.setTile((x-width) / tileSize, (y-height) / tileSize, 1);
+			
+			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, 1);
+			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, 1);
+			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, 1);
+			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, 1);
+			
+			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, 1);
+			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, 1);
+			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, 1);
+			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, 1);
+			
+			kill();
+			FlxG.camera.shake(0.001,0.35);
+			FlxG.camera.flash(0xff0000a2,0.35);
 			
 		}
 		
@@ -178,13 +251,7 @@ package
 			visible = false;
 			velocity.make();
 			acceleration.make();
-			FlxG.camera.shake(0.005,0.35);
-			FlxG.camera.flash(0xffd8eba2,0.35);
-			if(_gibs != null)
-			{
-				_gibs.at(this);
-				_gibs.start(true,5,0,50);
-			}
+			
 		}
 	}
 }
