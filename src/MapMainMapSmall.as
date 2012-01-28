@@ -3,25 +3,21 @@
 package  {
 	import org.flixel.*;
 	
-	public class MapMainMap extends MapBase {
+	public class MapMainMapSmall extends MapBase {
 		//Media content declarations
-<<<<<<< HEAD
-		[Embed(source="../assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
-		[Embed(source="../assets/game_tilesheetA.png")] public var Img_MainGame:Class;
-=======
-		[Embed(source="../assets/MapCSV_MainMap_MainGame32.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
-		[Embed(source="../assets/game_tilesheetA32wide.png")] public var Img_MainGame:Class;
->>>>>>> Added 32 and 16 map
+		[Embed(source="../assets/MapCSV_MainMap_MainGame16.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="../assets/game_tilesheetA16wide.png")] public var Img_MainGame:Class;
 
 		
-		public function MapMainMap() {
+		public function MapMainMapSmall() {
 
 			_setCustomValues();
 
 			bgColor = 0xffffffff;
 
 			layerMainGame = new FlxTilemap();
-			layerMainGame.loadMap(new CSV_MainGame, Img_MainGame,32,32);
+			
+			layerMainGame.loadMap(new CSV_MainGame, Img_MainGame,16,16);
 			layerMainGame.x = 0;
 			layerMainGame.y = 0;
 			layerMainGame.scrollFactor.x = 1.000000;
@@ -33,20 +29,20 @@ package  {
 			boundsMinX = 0;
 			boundsMinY = 0;
 			boundsMaxX = 1280;
-			boundsMaxY = 704;
+			boundsMaxY = 720;
 			FlxG.bgColor=bgColor;
 		}
 
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
-			obj = new Exit(1192, 328);;
+			obj = new Player(56, 280);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Player(64, 320);;
+			obj = new Exit(1216, 304);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
