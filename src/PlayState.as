@@ -23,6 +23,14 @@ package
 		[Embed(source="../assets/spaceman.png")] private static var ImgSpaceman:Class;
 		[Embed(source="../assets/gib.png")] private static var ImgGibs:Class;
 		
+		
+		// graphics
+		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
+		
+		// graphics classes
+		private var fgInverseVignette : FlxSprite;
+		
+		
 		// Some static constants for the size of the tilemap tiles
 		private const TILE_WIDTH:uint = 16;
 		private const TILE_HEIGHT:uint = 16;
@@ -122,7 +130,17 @@ package
 			
 			highlightBox = new FlxObject(0, 0, TILE_WIDTH, TILE_HEIGHT);
 			*/
+			
+			
 			setupPlayer();
+			
+			
+			/* add foreground stuff */
+			fgInverseVignette = new FlxSprite(0, 0, FgInverseVignetteClass);
+			
+			fgInverseVignette.blend = "multiply";
+			
+			add(fgInverseVignette);
 			/*
 			// When switching between modes here, the map is reloaded with it's own data, so the positions of tiles are kept the same
 			// Notice that different tilesets are used when the auto mode is switched
