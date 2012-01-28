@@ -5,7 +5,7 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../assets/spaceman.png")] protected var ImgSpaceman:Class;
+		[Embed(source="../assets/charAnim.png")] protected var ImgSpaceman:Class;
 		
 		
 		protected var _restart:Number;
@@ -15,18 +15,15 @@ package
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
-		public function Player(X:int,Y:int,Gibs:FlxEmitter, collisionMap:FlxTilemap)
+		public function Player(X:int,Y:int)
 		{
 			super(X,Y);
-			loadGraphic(ImgSpaceman,true,true,16);
+			loadGraphic(ImgSpaceman,true,true,32);
 			_restart = 0;
 			
-			_gibs = Gibs;
-			_map = collisionMap;
-			
 			//bounding box tweaks
-			width = 14;
-			height = 14;
+			width = 32;
+			height = 32;
 			offset.x = 1;
 			offset.y = 1;
 			
@@ -39,13 +36,21 @@ package
 			
 			//animations
 			addAnimation("idle", [0]);
-			addAnimation("run", [1, 2, 3, 0], 12);
-			addAnimation("jump", [4]);
-			
-			
+			addAnimation("run", [0, 1, 2, 3,4,5,6], 12);	
+			addAnimation("jump", [2]);
 			
 		}
 		
+		public function setTileMap(collisionMap:FlxTilemap):void
+		{
+			_map = collisionMap;
+		}
+		
+		public function setGibEmitter(Gibs:FlxEmitter):void
+		{
+			_gibs = Gibs;
+		}
+			
 		public function respawn():void
 		{
 			x = 64;

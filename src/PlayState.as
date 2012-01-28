@@ -33,7 +33,7 @@ package
 		private var highlightBox:FlxObject;
 		
 		// Player modified from "Mode" demo
-		private var player:FlxSprite;
+		private var player:Player;
 		
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
@@ -177,8 +177,9 @@ package
 		
 		private function setupPlayer():void
 		{
-			player = new Player(64, 220, _littleGibs, collisionMap);
-			
+			player = new Player(64, 220);
+			player.setTileMap(collisionMap);
+			player.setGibEmitter(_littleGibs);
 			add(player);
 		}
 		
