@@ -6,7 +6,7 @@ package
 	import flash.net.URLRequest;
 	
 	import org.flixel.*;
-
+	
 	public class PlayState extends FlxState
 	{
 		// Tileset that works with AUTO mode (best for thin walls)
@@ -22,7 +22,7 @@ package
 		[Embed(source = '../assets/default_auto.txt', mimeType = 'application/octet-stream')]private static var default_auto:Class;
 		[Embed(source = '../assets/default_alt.txt', mimeType = 'application/octet-stream')]private static var default_alt:Class;
 		[Embed(source = '../assets/default_empty.txt', mimeType = 'application/octet-stream')]private static var default_empty:Class;
-
+		
 		[Embed(source="../assets/spaceman.png")] private static var ImgSpaceman:Class;
 		[Embed(source="../assets/gib.png")] private static var ImgGibs:Class;
 		
@@ -42,10 +42,6 @@ package
 		private var movieEffects : MovieClip;
 		
 		
-		// stats tracking
-		public var statsTracker : StatsTracker;
-		private var loadJSONData : JSONLoad;
-		
 		// Some static constants for the size of the tilemap tiles
 		private const TILE_WIDTH:uint = 16;
 		private const TILE_HEIGHT:uint = 16;
@@ -57,7 +53,7 @@ package
 		private var map:MapBase;
 		
 		// We need to know which level it is for logic
-	 	private var levelId : Number;
+		private var levelId : Number;
 		
 		// Box to show the user where they're placing stuff
 		private var highlightBox:FlxObject;
@@ -98,7 +94,7 @@ package
 		{
 			tutorialTriggers = new Array(); 
 			tutorialTriggers = new Array();
-
+			
 			mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
@@ -106,7 +102,7 @@ package
 			mcLoader.y = 100;	
 			mcLoader.blendMode = "screen";
 			mcLoader.scaleX = mcLoader.scaleY = 2;
-
+			
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
 			
@@ -189,69 +185,62 @@ package
 			// Notice that different tilesets are used when the auto mode is switched
 			autoAltBtn = new FlxButton(4, FlxG.height - 24, "AUTO", function():void
 			{
-				switch(collisionMap.auto)
-				{
-					case FlxTilemap.AUTO:
-						collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
-							alt_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.ALT);
-						autoAltBtn.label.text = "ALT";
-						break;
-					
-					case FlxTilemap.ALT:
-						collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
-							empty_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.OFF);
-						autoAltBtn.label.text = "OFF";
-						break;
-					
-					case FlxTilemap.OFF:
-						collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
-							auto_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.AUTO);
-						autoAltBtn.label.text = "AUTO";
-						break;
-				}
-				
+			switch(collisionMap.auto)
+			{
+			case FlxTilemap.AUTO:
+			collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
+			alt_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.ALT);
+			autoAltBtn.label.text = "ALT";
+			break;
+			
+			case FlxTilemap.ALT:
+			collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
+			empty_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.OFF);
+			autoAltBtn.label.text = "OFF";
+			break;
+			
+			case FlxTilemap.OFF:
+			collisionMap.loadMap(FlxTilemap.arrayToCSV(collisionMap.getData(true), collisionMap.widthInTiles),
+			auto_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.AUTO);
+			autoAltBtn.label.text = "AUTO";
+			break;
+			}
+			
 			});
 			add(autoAltBtn);
 			
 			//TEST
 			resetBtn = new FlxButton(8 + autoAltBtn.width, FlxG.height - 24, "Reset", function():void
 			{
-				switch(collisionMap.auto)
-				{
-					case FlxTilemap.AUTO:
-						collisionMap.loadMap(new default_auto(), auto_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.AUTO);
-						player.x = 64;
-						player.y = 220;
-						break;
-					
-					case FlxTilemap.ALT:
-						collisionMap.loadMap(new default_alt(), alt_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.ALT);
-						player.x = 64;
-						player.y = 128;
-						break;
-					
-					case FlxTilemap.OFF:
-						collisionMap.loadMap(new default_empty(), empty_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.OFF);
-						player.x = 64;
-						player.y = 64;
-						break;
-				}
+			switch(collisionMap.auto)
+			{
+			case FlxTilemap.AUTO:
+			collisionMap.loadMap(new default_auto(), auto_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.AUTO);
+			player.x = 64;
+			player.y = 220;
+			break;
+			
+			case FlxTilemap.ALT:
+			collisionMap.loadMap(new default_alt(), alt_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.ALT);
+			player.x = 64;
+			player.y = 128;
+			break;
+			
+			case FlxTilemap.OFF:
+			collisionMap.loadMap(new default_empty(), empty_tiles, TILE_WIDTH, TILE_HEIGHT, FlxTilemap.OFF);
+			player.x = 64;
+			player.y = 64;
+			break;
+			}
 			});
 			add(resetBtn);
 			
 			quitBtn = new FlxButton(FlxG.width - resetBtn.width - 4, FlxG.height - 24, "Quit",
-				function():void { FlxG.fade(0xff000000, 0.22, function():void { FlxG.switchState(new MenuState()); } ); } );
+			function():void { FlxG.fade(0xff000000, 0.22, function():void { FlxG.switchState(new MenuState()); } ); } );
 			add(quitBtn);
 			
 			helperTxt = new FlxText(12 + autoAltBtn.width*2, FlxG.height - 30, 150, "Click to place tiles\nShift-Click to remove tiles\nArrow keys to move");
 			add(helperTxt);*/
-			
-			// initialise stats
-			statsTracker  = new StatsTracker();
-			statsTracker.trackItem("explosions");
-			statsTracker.trackItem("platforms");
-			statsTracker.trackItem("spawn points");
-			statsTracker.trackItem("trees");
 		}
 		
 		override public function update():void
@@ -260,7 +249,7 @@ package
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
 			
-
+			
 			for each(var t:TutorialTrigger in tutorialTriggers)
 			{
 				if (player.overlaps(t))
@@ -272,11 +261,11 @@ package
 					t.HideMessage();
 				}
 			}
-
+			
 			FlxG.overlap(player, trees, climbTree);
 			FlxG.collide(player, trees);
 			
-
+			
 			//If we have hit the exit
 			if(player.overlaps(exit))
 			{
@@ -291,10 +280,10 @@ package
 			
 			if (FlxG.mouse.pressed())
 			{
-				// FlxTilemaps can be manually edited at runtime as well.
-				// Setting a tile to 0 removes it, and setting it to anything else will place a tile.
-				// If auto map is on, the map will automatically update all surrounding tiles.
-				collisionMap.setTile(FlxG.mouse.x / TILE_WIDTH, FlxG.mouse.y / TILE_HEIGHT, FlxG.keys.SHIFT?0:1);
+			// FlxTilemaps can be manually edited at runtime as well.
+			// Setting a tile to 0 removes it, and setting it to anything else will place a tile.
+			// If auto map is on, the map will automatically update all surrounding tiles.
+			collisionMap.setTile(FlxG.mouse.x / TILE_WIDTH, FlxG.mouse.y / TILE_HEIGHT, FlxG.keys.SHIFT?0:1);
 			}*/
 			
 			super.update();
@@ -309,10 +298,10 @@ package
 				//player.x += 10;
 			}
 			//player.y = treeToClimb.y;
-		
+			
 			
 		}
-
+		
 		public override function draw():void
 		{
 			super.draw();
@@ -338,9 +327,4 @@ package
 		}
 	}
 }
-
-
-
-
-
 
