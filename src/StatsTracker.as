@@ -94,7 +94,7 @@ package
 			
 			//trace ( JSON.encode(trackedItems)); 
 			
-			return JSON.encode(trackedItems);
+			return com.adobe.serialization.json.JSON.encode(trackedItems);
 		}
 		
 		public function report() : void {

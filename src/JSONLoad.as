@@ -27,7 +27,7 @@ package
 		private function onJSONLoaderComplete(e:Event):void 
 		{
 			var raw:String = String(e.target.data);
-			var data:Array = JSON.decode(raw) as Array;
+			var data:Array = com.adobe.serialization.json.JSON.decode(raw) as Array;
 			
 			callback( data );
 		}
