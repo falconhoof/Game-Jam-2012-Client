@@ -22,7 +22,7 @@ package  {
 
 		public function MapBase() { }
 
-		public var bgColor:uint = 0xff000000;
+		public var bgColor:uint = 0xffffffff;
 
 		virtual public function addSpritesToLayerMainGame(onAddCallback:Function = null):void { }
 

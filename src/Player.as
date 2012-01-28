@@ -1,4 +1,5 @@
-
+//NOTE TO SELF: Need to add an empty tile at start(0) of tilesets
+//NOTE TO SELF: Some Issues with tileset need to sort
 package
 {
 	import org.flixel.*;
@@ -14,6 +15,8 @@ package
 		protected var tileSize:Number;
 		protected var spawnX:Number;
 		protected var spawnY:Number;
+		
+		public static const FLAT_TILE:Number=6;
 		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
@@ -83,13 +86,17 @@ package
 			if(!alive)
 			{
 				_restart += FlxG.elapsed;
-				if(_restart > 2)
+				if(_restart > 1)
 				{
 					respawn();
 				}
 				return;
 			}
 			
+			if (this.y>_map.height)
+			{
+				alive=false;	
+			}
 			
 			//MOVEMENT
 			acceleration.x = 0;
@@ -214,34 +221,34 @@ package
 		
 		public function createTiles():void
 		{
-			_map.setTile(x / tileSize, y / tileSize, 1);
-			_map.setTile((x+width+1) / tileSize, y / tileSize, 1);
-			_map.setTile((x-width) / tileSize, y / tileSize, 1);
-			_map.setTile(x / tileSize, (y+height) / tileSize, 1);
-			_map.setTile(x / tileSize, (y-height) / tileSize, 1);
-			_map.setTile((x+(width *2)) / tileSize, y / tileSize, 1);
-			_map.setTile((x-(width *2)) / tileSize, y / tileSize, 1);
-			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, 1);
-			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, 1);
-			_map.setTile((x+(width *3)) / tileSize, y / tileSize, 1);
-			_map.setTile((x-(width *3)) / tileSize, y / tileSize, 1);
-			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, 1);
-			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, 1);
+			_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile((x+width+1) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile((x-width) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y+height) / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y-height) / tileSize, FLAT_TILE);
+			_map.setTile((x+(width *2)) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile((x-(width *2)) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
+			_map.setTile((x+(width *3)) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile((x-(width *3)) / tileSize, y / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, FLAT_TILE);
+			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, FLAT_TILE);
 			//fill in diagonals
-			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, 1);
-			_map.setTile((x-width) / tileSize, (y+height) / tileSize, 1);
-			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, 1);
-			_map.setTile((x-width) / tileSize, (y-height) / tileSize, 1);
+			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, FLAT_TILE);
+			_map.setTile((x-width) / tileSize, (y+height) / tileSize, FLAT_TILE);
+			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, FLAT_TILE);
+			_map.setTile((x-width) / tileSize, (y-height) / tileSize, FLAT_TILE);
 			
-			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, 1);
-			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, 1);
-			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, 1);
-			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, 1);
+			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, FLAT_TILE);
+			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, FLAT_TILE);
+			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, FLAT_TILE);
+			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, FLAT_TILE);
 			
-			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, 1);
-			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, 1);
-			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, 1);
-			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, 1);
+			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
+			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
+			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, FLAT_TILE);
+			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, FLAT_TILE);
 			
 			kill();
 			FlxG.camera.shake(0.001,0.35);

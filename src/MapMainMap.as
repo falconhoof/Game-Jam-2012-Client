@@ -5,18 +5,18 @@ package  {
 	
 	public class MapMainMap extends MapBase {
 		//Media content declarations
-		[Embed(source="../assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
-		[Embed(source="../assets/32x4 Tiles (Row).png")] public var Img_MainGame:Class;
+		[Embed(source="./assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="./assets/game_tilesheetA.png")] public var Img_MainGame:Class;
 
 		
 		public function MapMainMap() {
 
 			_setCustomValues();
 
-			bgColor = 0xff000000;
+			bgColor = 0xffffffff;
 
 			layerMainGame = new FlxTilemap();
-			layerMainGame.loadMap(new CSV_MainGame, Img_MainGame,32,32);
+			layerMainGame.loadMap(new CSV_MainGame,Img_MainGame,32,32);
 			layerMainGame.x = 0;
 			layerMainGame.y = 0;
 			layerMainGame.scrollFactor.x = 1.000000;
@@ -28,19 +28,20 @@ package  {
 			boundsMinX = 0;
 			boundsMinY = 0;
 			boundsMaxX = 1280;
-			boundsMaxY = 704;
+			boundsMaxY = 640;
+			FlxG.bgColor = bgColor;
 		}
 
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
-			obj = new Exit(1184, 352);;
+			obj = new Exit(1216, 224);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new Player(64, 352);;
+			obj = new Player(64, 192);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
