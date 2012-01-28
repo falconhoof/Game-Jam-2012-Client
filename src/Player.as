@@ -1,30 +1,32 @@
+
 package
 {
 	import org.flixel.*;
-
+	
 	public class Player extends FlxSprite
 	{
 		[Embed(source="assets/spaceman.png")] protected var ImgSpaceman:Class;
 		
-	
+		
 		protected var _restart:Number;
 		protected var _gibs:FlxEmitter;
-		
-		
-		
+		protected var _map:FlxTilemap;
 		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
-		public function Player(X:int,Y:int,Bullets:FlxGroup,Gibs:FlxEmitter)
+		public function Player(X:int,Y:int,Gibs:FlxEmitter, collisionMap:FlxTilemap)
 		{
 			super(X,Y);
-			loadGraphic(ImgSpaceman,true,true,8);
+			loadGraphic(ImgSpaceman,true,true,16);
 			_restart = 0;
 			
+			_gibs = Gibs;
+			_map = collisionMap;
+			
 			//bounding box tweaks
-			width = 6;
-			height = 7;
+			width = 14;
+			height = 14;
 			offset.x = 1;
 			offset.y = 1;
 			
@@ -33,7 +35,7 @@ package
 			drag.x = runSpeed*8;
 			acceleration.y = 420;
 			maxVelocity.x = runSpeed;
-
+			
 			
 			//animations
 			addAnimation("idle", [0]);
@@ -41,13 +43,25 @@ package
 			addAnimation("jump", [4]);
 			
 			
-	
+			
+		}
+		
+		public function respawn():void
+		{
+			x = 64;
+			y = 64;
+			alive = true;
+			exists = true;
+			visible = true;
+			solid = true;
+			acceleration.y = 420;
+			maxVelocity.x = 80;
 		}
 		
 		override public function destroy():void
 		{
 			super.destroy();
-
+			
 			_gibs = null;
 		}
 		
@@ -58,11 +72,13 @@ package
 			{
 				_restart += FlxG.elapsed;
 				if(_restart > 2)
-					FlxG.resetState();
+				{
+					respawn();
+				}
 				return;
 			}
 			
-		
+			
 			//MOVEMENT
 			acceleration.x = 0;
 			if(FlxG.keys.LEFT)
@@ -79,6 +95,15 @@ package
 			{
 				y -= 1;
 				velocity.y = -200;
+			}
+			if(FlxG.keys.justPressed("SPACE"))
+			{
+				explode();
+				kill();
+				FlxG.camera.shake(0.005,0.35);
+				FlxG.camera.flash(0xffd8eba2,0.35);
+				
+				
 			}
 			
 			
@@ -115,13 +140,33 @@ package
 			super.hurt(Damage);
 		}
 		
+		public function explode():void
+		{
+			_map.setTile(x / 16, y / 16, 0);
+			_map.setTile((x+width+1) / 16, y / 16, 0);
+			_map.setTile((x-width) / 16, y / 16, 0);
+			_map.setTile(x / 16, (y+height) / 16, 0);
+			_map.setTile(x / 16, (y-height) / 16, 0);
+			_map.setTile((x+(width *2)) / 16, y / 16, 0);
+			_map.setTile((x-(width *2)) / 16, y / 16, 0);
+			_map.setTile(x / 16, (y+(height*2)) / 16, 0);
+			_map.setTile(x / 16, (y-(height*2)) / 16, 0);
+			_map.setTile((x+(width *3)) / 16, y / 16, 0);
+			_map.setTile((x-(width *3)) / 16, y / 16, 0);
+			_map.setTile(x / 16, (y+(height*3)) / 16, 0);
+			_map.setTile(x / 16, (y-(height*3)) / 16, 0);
+			
+			FlxG.camera.shake(0.005,0.35);
+			FlxG.camera.flash(0xffd8eba2,0.35);
+			
+		}
+		
 		override public function kill():void
 		{
 			if(!alive)
 				return;
-			solid = false;
-
 			super.kill();
+			solid = false;
 			flicker(0);
 			exists = true;
 			visible = false;
