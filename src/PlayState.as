@@ -76,7 +76,7 @@ package
 		
 		override public function create():void
 		{
-			tutorialTriggers = new Array();
+			tutorialTriggers = new Array(); 
 
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
