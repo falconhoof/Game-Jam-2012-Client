@@ -5,9 +5,13 @@ package  {
 	
 	public class MapMainMap extends MapBase {
 		//Media content declarations
-
+<<<<<<< HEAD
+		[Embed(source="../assets/MapCSV_MainMap_MainGame.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
+		[Embed(source="../assets/game_tilesheetA.png")] public var Img_MainGame:Class;
+=======
 		[Embed(source="../assets/MapCSV_MainMap_MainGame32.txt", mimeType="application/octet-stream")] public var CSV_MainGame:Class;
 		[Embed(source="../assets/game_tilesheetA32wide.png")] public var Img_MainGame:Class;
+>>>>>>> Added 32 and 16 map
 
 		
 		public function MapMainMap() {
