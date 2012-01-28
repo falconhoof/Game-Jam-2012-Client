@@ -1,6 +1,9 @@
 package
 {
 	import flash.display.BlendMode;
+	import flash.display.Loader;
+	import flash.display.MovieClip;
+	import flash.net.URLRequest;
 	
 	import org.flixel.*;
 
@@ -31,6 +34,10 @@ package
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
 		private var fgSunlightGradient : FlxSprite;
+		
+		// movieclip
+		private var mcLoader:Loader = new Loader();
+		private var movieEffects : MovieClip;
 		
 		
 		// Some static constants for the size of the tilemap tiles
@@ -83,6 +90,14 @@ package
 		override public function create():void
 		{
 			tutorialTriggers = new Array();
+
+			/*mcLoader = new Loader();
+			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
+			mcLoader.load(url);
+			FlxG.stage.addChild(mcLoader);
+			*/
+				
+//put Jon's movie clip fx on top
 			
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
