@@ -11,12 +11,12 @@ package
 			t.size = 32;
 			t.alignment = "center";
 			add(t);
-			t = new FlxText(FlxG.width/2-100,FlxG.height-30,200,"click to test");
+			t = new FlxText(FlxG.width/2-100,FlxG.height-30,200,"Press any Key");
 			t.size = 16;
 			t.alignment = "center";
 			add(t);
 			
-			FlxG.mouse.show();
+			FlxG.mouse.hide();
 		}
 
 		override public function update():void
@@ -25,6 +25,11 @@ package
 
 			if(FlxG.mouse.justPressed())
 				FlxG.switchState(new PlayState());
+			
+			if (FlxG.keys.any() ) {
+				FlxG.switchState(new PlayState());
+				
+			}
 		}
 	}
 }

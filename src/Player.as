@@ -14,6 +14,9 @@ package
 		protected var spawnX:Number;
 		protected var spawnY:Number;
 		
+		private var jumpSpeed : Number;
+		private var runSpeed : Number;
+		
 		public static const EMPTY_TILE:Number = 0;
 		public static const FLAT_TILE:Number = 1;
 		public static const DOUBLE_CURVE:Number = 2;
@@ -38,11 +41,11 @@ package
 			offset.y = 1;
 			
 			//basic player physics
-			var runSpeed:uint = 80;
-			drag.x = runSpeed*8;
-			acceleration.y = 420;
+			runSpeed = 160;
+			drag.x = runSpeed*10;
+			acceleration.y = 2000;
 			maxVelocity.x = runSpeed;
-			
+			jumpSpeed = 500;
 			
 			//animations
 			addAnimation("idle", [0]);
@@ -71,9 +74,7 @@ package
 			exists = true;
 			visible = true;
 			solid = true;
-			acceleration.y = 420;
 			velocity.y = 0;
-			maxVelocity.x = 80;
 			_restart = 0;
 		}
 		
@@ -119,7 +120,7 @@ package
 			if(FlxG.keys.justPressed("UP") && velocity.y == 0)
 			{
 				y -= 1;
-				velocity.y = -200;
+				velocity.y = -jumpSpeed;
 			}
 			if(FlxG.keys.justPressed("Q"))
 			{
@@ -231,7 +232,7 @@ package
 		{
 			var platformHeight:int = (y / tileSize) + 1;
 			
-			if (this._facing == FlxObject.RIGHT)
+			if (facing == FlxObject.RIGHT)
 			{
 				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
 				_map.setTile((x + width + 1) / tileSize, platformHeight, FLAT_TILE);
