@@ -28,9 +28,10 @@ package
 		//I'd recommend checking that out for some ideas!
 		public function Player(X:int,Y:int)
 		{
-			super(X,Y);
-			spawnX = X;
-			spawnY = Y-82;
+			super(X, Y);
+			tileSize = 32;
+			spawnX = closestTilePos(X);
+			spawnY = closestTilePos(Y) + 31;
 			loadGraphic(ImgSpaceman,true,true,32,64);
 			_restart = 0;
 			
@@ -58,7 +59,6 @@ package
 		public function setTileMap(collisionMap:FlxTilemap):void
 		{
 			_map = collisionMap;
-			tileSize = 32;
 		}
 		
 		public function setGibEmitter(Gibs:FlxEmitter):void
@@ -134,12 +134,15 @@ package
 			}
 			if(FlxG.keys.justPressed("W"))
 			{
-				createTiles();
-				
-				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffd8eba2,0.35);	   
-                
-                stats.increment("platforms");
+				if (canCreate())
+				{
+					createTiles();
+					
+					FlxG.camera.shake(0.005,0.35);
+					FlxG.camera.flash(0xffd8eba2,0.35);	   
+					
+					stats.increment("platforms");
+				}
 			}
 			if(FlxG.keys.justPressed("E"))
 			{
@@ -281,6 +284,50 @@ package
 			
 			//velocity.make();
 			//acceleration.make();
+		}
+		
+		private function canCreate():Boolean
+		{
+			var allowCreate:Boolean = false;
+			
+			var closestTileX:Number = closestTilePos(x);
+			var closestTileY:Number = closestTilePos(y) - 32;
+			
+			var creationLeftX:int = x - 128;
+			var creationRightX:int = x + 160;
+			
+			if (this._facing == FlxObject.RIGHT)
+			{
+				if (spawnX < closestTileX || spawnX > creationRightX)
+				{
+					return true;
+				}
+				else if ((closestTileY + 32) < spawnY - 65 || (closestTileY + 32) > spawnY + 65)
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if (spawnX < creationLeftX || spawnX > closestTileX)
+				{
+					return true;
+				}
+				else
+				{
+					if ((closestTileY + 32) < spawnY - 65 || (closestTileY + 32) > spawnY + 65)
+					{
+						return true;
+					}
+				}
+			}
+			
+			return allowCreate;
+		}
+		
+		private function closestTilePos(pos:int):Number
+		{
+			return Math.floor(pos / tileSize) * tileSize;
 		}
 	}
 }
