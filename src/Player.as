@@ -16,7 +16,10 @@ package
 		protected var spawnX:Number;
 		protected var spawnY:Number;
 		
-		public static const FLAT_TILE:Number=6;
+		public static const FLAT_TILE:Number = 1;
+		public static const DOUBLE_CURVE:Number = 2;
+		public static const LEFT_CURVE:Number = 7;
+		public static const RIGHT_CURVE:Number = 8;
 		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
@@ -25,13 +28,13 @@ package
 		{
 			super(X,Y);
 			spawnX = X;
-			spawnY = Y-50;
-			loadGraphic(ImgSpaceman,true,true,32);
+			spawnY = Y-82;
+			loadGraphic(ImgSpaceman,true,true,32,64);
 			_restart = 0;
 			
 			//bounding box tweaks
 			width = 30;
-			height = 32;
+			height = 64;
 			offset.x = 1;
 			offset.y = 1;
 			
@@ -137,10 +140,6 @@ package
 				FlxG.camera.flash(0xffffeba2,0.35);	
 			}
 			
-			
-			
-			//ANIMATION
-			//ANIMATION
 			if(velocity.y != 0)
 			{
 				play("jump");
@@ -153,8 +152,6 @@ package
 			{
 				play("run");
 			}
-			
-			
 		}
 		
 		override public function hurt(Damage:Number):void
@@ -175,40 +172,40 @@ package
 		{
 			_map.setTile(x / tileSize, y / tileSize, 0);
 			//one to each side
-			_map.setTile((x+width+1) / tileSize, y / tileSize, 0);
-			_map.setTile((x-width) / tileSize, y / tileSize, 0);
+			_map.setTile((x+tileSize+1) / tileSize, y / tileSize, 0);
+			_map.setTile((x-tileSize) / tileSize, y / tileSize, 0);
 			//one up one down
-			_map.setTile(x / tileSize, (y+height) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-height) / tileSize, 0);
+			_map.setTile(x / tileSize, (y+tileSize) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-tileSize) / tileSize, 0);
 			//second on each side
-			_map.setTile((x+(width *2)) / tileSize, y / tileSize, 0);
-			_map.setTile((x-(width *2)) / tileSize, y / tileSize, 0);
+			_map.setTile((x+(tileSize *2)) / tileSize, y / tileSize, 0);
+			_map.setTile((x-(tileSize *2)) / tileSize, y / tileSize, 0);
 			//second up and down
-			_map.setTile(x / tileSize, (y+(height*2)) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-(height*2)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y+(tileSize*2)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-(tileSize*2)) / tileSize, 0);
 			//fill in diagonals
-			_map.setTile((x+width+1) / tileSize, (y+height) / tileSize, 0);
-			_map.setTile((x-width) / tileSize, (y+height) / tileSize, 0);
-			_map.setTile((x+width+1) / tileSize, (y-height) / tileSize, 0);
-			_map.setTile((x-width) / tileSize, (y-height) / tileSize, 0);
+			_map.setTile((x+tileSize+1) / tileSize, (y+tileSize) / tileSize, 0);
+			_map.setTile((x-tileSize) / tileSize, (y+tileSize) / tileSize, 0);
+			_map.setTile((x+tileSize+1) / tileSize, (y-tileSize) / tileSize, 0);
+			_map.setTile((x-tileSize) / tileSize, (y-tileSize) / tileSize, 0);
 			
-			_map.setTile((x+(width *2)) / tileSize, (y+height) / tileSize, 0);
-			_map.setTile((x-(width *2)) / tileSize, (y+height) / tileSize, 0);
-			_map.setTile((x+(width *2)) / tileSize, (y-height) / tileSize, 0);
-			_map.setTile((x-(width *2)) / tileSize, (y-height) / tileSize, 0);
+			_map.setTile((x+(tileSize *2)) / tileSize, (y+tileSize) / tileSize, 0);
+			_map.setTile((x-(tileSize *2)) / tileSize, (y+tileSize) / tileSize, 0);
+			_map.setTile((x+(tileSize *2)) / tileSize, (y-tileSize) / tileSize, 0);
+			_map.setTile((x-(tileSize *2)) / tileSize, (y-tileSize) / tileSize, 0);
 			
-			_map.setTile((x+width+1) / tileSize, (y+(height*2)) / tileSize, 0);
-			_map.setTile((x+width+1) / tileSize, (y-(height*2)) / tileSize, 0);
-			_map.setTile((x-width+1) / tileSize, (y+(height*2)) / tileSize, 0);
-			_map.setTile((x-width+1) / tileSize, (y-(height*2)) / tileSize, 0);
+			_map.setTile((x+tileSize+1) / tileSize, (y+(tileSize*2)) / tileSize, 0);
+			_map.setTile((x+tileSize+1) / tileSize, (y-(tileSize*2)) / tileSize, 0);
+			_map.setTile((x-tileSize+1) / tileSize, (y+(tileSize*2)) / tileSize, 0);
+			_map.setTile((x-tileSize+1) / tileSize, (y-(tileSize*2)) / tileSize, 0);
 			
 			
 			//third on each side
-			_map.setTile((x+(width *3)) / tileSize, y / tileSize, 0);
-			_map.setTile((x-(width *3)) / tileSize, y / tileSize, 0);
+			_map.setTile((x+(tileSize *3)) / tileSize, y / tileSize, 0);
+			_map.setTile((x-(tileSize *3)) / tileSize, y / tileSize, 0);
 			//third up and down
-			_map.setTile(x / tileSize, (y+(height*3)) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-(height*3)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y+(tileSize*3)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y-(tileSize*3)) / tileSize, 0);
 			kill();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
@@ -221,19 +218,21 @@ package
 		
 		public function createTiles():void
 		{
+			var platformHeight:int = (y / tileSize) + 1;
+			
 			if (this._facing == FlxObject.RIGHT)
 			{
-				_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x + width + 1) / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x + width * 2) / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x + width * 3) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x + width + 1) / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x + width * 2) / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x + width * 3) / tileSize, platformHeight, FLAT_TILE);
 			}
 			else
 			{
-				_map.setTile(x / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x - width) / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x - (width * 2)) / tileSize, y / tileSize, FLAT_TILE);
-				_map.setTile((x - (width * 3)) / tileSize, y / tileSize, FLAT_TILE);
+				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x - width) / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x - (width * 2)) / tileSize, platformHeight, FLAT_TILE);
+				_map.setTile((x - (width * 3)) / tileSize, platformHeight, FLAT_TILE);
 			}
 			
 			kill();
