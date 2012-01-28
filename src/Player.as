@@ -14,6 +14,7 @@ package
 		protected var spawnX:Number;
 		protected var spawnY:Number;
 		
+		public static const EMPTY_TILE:Number = 0;
 		public static const FLAT_TILE:Number = 1;
 		public static const DOUBLE_CURVE:Number = 2;
 		public static const LEFT_CURVE:Number = 7;
@@ -121,7 +122,7 @@ package
 			}
 			if(FlxG.keys.justPressed("Q"))
 			{
-				explode();
+				explode(4);
 				
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffd8eba2,0.35);	    
@@ -185,44 +186,35 @@ package
 			super.hurt(Damage);
 		}
 		
-		public function explode():void
+		public function explode(diameter:int):void
 		{
-			_map.setTile(x / tileSize, y / tileSize, 0);
-			//one to each side
-			_map.setTile((x+tileSize+1) / tileSize, y / tileSize, 0);
-			_map.setTile((x-tileSize) / tileSize, y / tileSize, 0);
-			//one up one down
-			_map.setTile(x / tileSize, (y+tileSize) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-tileSize) / tileSize, 0);
-			//second on each side
-			_map.setTile((x+(tileSize *2)) / tileSize, y / tileSize, 0);
-			_map.setTile((x-(tileSize *2)) / tileSize, y / tileSize, 0);
-			//second up and down
-			_map.setTile(x / tileSize, (y+(tileSize*2)) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-(tileSize*2)) / tileSize, 0);
+			_map.setTile(x / tileSize, (y / tileSize) + 1, EMPTY_TILE);
+			
+			for (var i:int = 1; i < diameter; i++)
+			{
+				_map.setTile((x + (tileSize * i)) / tileSize, (y / tileSize) + 1, EMPTY_TILE);
+				_map.setTile((x - (tileSize * i)) / tileSize, (y / tileSize) + 1, EMPTY_TILE);
+				
+				_map.setTile(x / tileSize, ((y + (tileSize * i)) / tileSize) + 1, EMPTY_TILE);
+				_map.setTile(x / tileSize, ((y - (tileSize * i)) / tileSize) + 1, EMPTY_TILE);
+			}
+
 			//fill in diagonals
-			_map.setTile((x+tileSize+1) / tileSize, (y+tileSize) / tileSize, 0);
-			_map.setTile((x-tileSize) / tileSize, (y+tileSize) / tileSize, 0);
-			_map.setTile((x+tileSize+1) / tileSize, (y-tileSize) / tileSize, 0);
-			_map.setTile((x-tileSize) / tileSize, (y-tileSize) / tileSize, 0);
+			_map.setTile((x+tileSize) / tileSize, ((y+tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-tileSize) / tileSize, ((y+tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x+tileSize) / tileSize, ((y-tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-tileSize) / tileSize, ((y-tileSize) / tileSize) + 1, EMPTY_TILE);
 			
-			_map.setTile((x+(tileSize *2)) / tileSize, (y+tileSize) / tileSize, 0);
-			_map.setTile((x-(tileSize *2)) / tileSize, (y+tileSize) / tileSize, 0);
-			_map.setTile((x+(tileSize *2)) / tileSize, (y-tileSize) / tileSize, 0);
-			_map.setTile((x-(tileSize *2)) / tileSize, (y-tileSize) / tileSize, 0);
+			_map.setTile((x+(tileSize *2)) / tileSize, ((y+tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-(tileSize *2)) / tileSize, ((y+tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x+(tileSize *2)) / tileSize, ((y-tileSize) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-(tileSize *2)) / tileSize, ((y-tileSize) / tileSize) + 1, EMPTY_TILE);
 			
-			_map.setTile((x+tileSize+1) / tileSize, (y+(tileSize*2)) / tileSize, 0);
-			_map.setTile((x+tileSize+1) / tileSize, (y-(tileSize*2)) / tileSize, 0);
-			_map.setTile((x-tileSize+1) / tileSize, (y+(tileSize*2)) / tileSize, 0);
-			_map.setTile((x-tileSize+1) / tileSize, (y-(tileSize*2)) / tileSize, 0);
+			_map.setTile((x+tileSize) / tileSize, ((y+(tileSize*2)) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x+tileSize) / tileSize, ((y-(tileSize*2)) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-tileSize) / tileSize, ((y+(tileSize*2)) / tileSize) + 1, EMPTY_TILE);
+			_map.setTile((x-tileSize) / tileSize, ((y-(tileSize*2)) / tileSize) + 1, EMPTY_TILE);
 			
-			
-			//third on each side
-			_map.setTile((x+(tileSize *3)) / tileSize, y / tileSize, 0);
-			_map.setTile((x-(tileSize *3)) / tileSize, y / tileSize, 0);
-			//third up and down
-			_map.setTile(x / tileSize, (y+(tileSize*3)) / tileSize, 0);
-			_map.setTile(x / tileSize, (y-(tileSize*3)) / tileSize, 0);
 			kill();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
