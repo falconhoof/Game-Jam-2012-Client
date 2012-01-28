@@ -62,6 +62,8 @@ package
 		
 		protected var _littleGibs:FlxEmitter;
 		
+		public var tutorialTriggers : Array;
+		
 		//Callback function to retrieve sprites from map
 		protected function onMapAddCallback(spr:FlxSprite):void
 		{
@@ -72,10 +74,16 @@ package
 			{
 				exit=spr as Exit;
 			}
+			else if(spr is TutorialTrigger)
+			{
+				tutorialTriggers.push(spr as TutorialTrigger);
+			}
 		}
 		
 		override public function create():void
 		{
+			tutorialTriggers = new Array();
+			
 			FlxG.framerate = 50;
 			FlxG.flashFramerate = 50;
 			
@@ -216,6 +224,18 @@ package
 			// Tilemaps can be collided just like any other FlxObject, and flixel
 			// automatically collides each individual tile with the object.
 			FlxG.collide(player, collisionMap);
+			
+			for each(var t:TutorialTrigger in tutorialTriggers)
+			{
+				if (player.overlaps(t))
+				{
+					t.ShowMessage();
+				}
+				else
+				{
+					t.HideMessage();
+				}
+			}
 			//If we have hit the exit
 			if(player.overlaps(exit))
 			{
