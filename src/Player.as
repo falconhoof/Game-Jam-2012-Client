@@ -6,7 +6,7 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../assets/charAnim.png")] protected var ImgSpaceman:Class;
+		[Embed(source="../assets/charIdleR.png")] protected var ImgSpaceman:Class;
 		
 		
 		protected var _restart:Number;

@@ -12,9 +12,8 @@ package
 			loadGraphic(ImgTut,true,true,128,64);
 		}
 		
-		public function load(X:Number=0, Y:Number=0,img:Class):void
+		public function load(img:Class,X:Number=0, Y:Number=0):void
 		{
-			TutorialMessage(x,y);
 			loadGraphic(img,true,true,128,64);
 		}
 	}
