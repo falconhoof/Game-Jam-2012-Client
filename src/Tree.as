@@ -21,7 +21,7 @@ package
 			
 			//immovable = true;
 			
-			acceleration.y = 420;
+			acceleration.y = 200;
 			
 			//animations
 			addAnimation("idle", [0]);

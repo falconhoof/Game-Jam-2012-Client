@@ -262,10 +262,6 @@ package
 		{
 			var tree:Tree;
 			tree = new Tree(x, y-96);
-			_map.setTile(x,y-64,FLAT_TILE);
-			_map.setTile(x,y-32,FLAT_TILE);
-			_map.setTile(x,y,FLAT_TILE);
-			_map.setTile(x,y-96,FLAT_TILE);
 			(FlxG.state as PlayState).addTree(tree);
 			FlxG.state.add(tree);
 			kill();

@@ -93,6 +93,10 @@ package
 			{
 				tutorialTriggers.push(spr as TutorialTrigger);
 			}
+			else if (spr is Tree)
+			{
+				trees.add(spr as Tree);
+			}
 		}
 		
 		override public function create():void
@@ -134,12 +138,13 @@ package
 			}
 			map.addSpritesToLayerMainGame(onMapAddCallback);
 			
-			
+			//stop trees by falling by initialising group before map creation
+			trees = new FlxGroup();
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;			
 			
 			
-			trees = new FlxGroup();
+			
 			explosions = new FlxGroup();
 			// Creates a new tilemap with no arguments
 			//collisionMap = new FlxTilemap();
