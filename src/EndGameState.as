@@ -81,10 +81,10 @@ package
 			super.update();
 			
 			if(FlxG.mouse.justPressed())
-				FlxG.switchState(new MenuState());	
+				FlxG.switchState(new MenuState(null));	
 			
 			if (FlxG.keys.any() ) {
-				FlxG.switchState(new MenuState());	
+				FlxG.switchState(new MenuState(null));	
 				
 			}
 		}		
