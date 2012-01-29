@@ -114,6 +114,7 @@ package
 		public function OnStartLevel():void
 		{
 
+
 			
 			if (player!=null){
 				player.active=false;
@@ -162,6 +163,7 @@ package
 			
 			levelId++;
 			setupPlayer();
+			
 			//endLevel=false;
 		}
 		
