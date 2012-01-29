@@ -21,7 +21,7 @@ package
 			tutorialMessage=new TutorialMessage(0,0);
 			tutorialMessage.loadMessageImage(img,0,0);
 			tutorialMessage.x=this.x+this.width;
-			tutorialMessage.y=this.y-tutorialMessage.height;
+			tutorialMessage.y=this.y-tutorialMessage.height+32;
 			tutorialMessage.visible=false;
 			FlxG.state.add(tutorialMessage);			
 		}

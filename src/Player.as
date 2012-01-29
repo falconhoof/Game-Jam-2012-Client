@@ -501,12 +501,12 @@ package
 		public function climbTree(tree:Tree):void
 		{
 			keyboardInputEnabled = false;
-			FlxG.log("playerxa " + x);
+			
 			treeToClimb=tree;
 			treeClimbSprite=new TreeClimbSprite(0,0);
 			treeClimbSprite.x=treeToClimb.x;
 			treeClimbSprite.y=treeToClimb.y-64;
-			FlxG.log("playerxb " + x);
+			
 			FlxG.state.add(treeClimbSprite);
 			//treeToClimb.visible=false;
 			
@@ -514,7 +514,7 @@ package
 			
 			this.visible=false;
 			treeClimbSprite.play("Climb");
-			FlxG.log("playerxc " + x);
+			
 			
 			//Comment out put back in animation is feckered
 			//play("climbTree");
