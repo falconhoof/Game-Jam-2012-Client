@@ -8,7 +8,9 @@ package
 	{
 		[Embed(source = "../assets/char_walkR.png")] protected var ImgSpaceman:Class;
 		[Embed(source = "../assets/Audio_Explosion.mp3")] private var explosionSound:Class;
-		
+		[Embed(source = "../assets/Audio_CreatePlatform.mp3")] private var createPlatformSound:Class;
+		[Embed(source = "../assets/Audio_CreateTree.mp3")] private var createTreeSound:Class;
+		[Embed(source = "../assets/Audio_SpawnIn.mp3")] private var spawnInSound:Class;
 		
 		protected var _restart:Number;
 		protected var _gibs:FlxEmitter;
@@ -80,6 +82,8 @@ package
 			sacrifices.push("Explosions");
 			currentSacrifice = 0;
 			
+			FlxG.play(spawnInSound);
+			
 		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
 			}
@@ -119,6 +123,7 @@ package
 			solid = true;
 			velocity.y = -400;
 			_restart = 0;
+			FlxG.play(spawnInSound);
 		}
 		
 		override public function destroy():void
@@ -249,6 +254,8 @@ package
 						FlxG.camera.shake(0.005,0.35);
 						FlxG.camera.flash(0x11ff11a2,0.35);	
 						
+						FlxG.play(createTreeSound);
+						
 						stats.increment("trees");
 					}
 				} else if ( sacrifices[currentSacrifice] == "Explosions") {
@@ -258,6 +265,8 @@ package
 						
 						FlxG.camera.shake(0.005,0.35);
 						FlxG.camera.flash(0xffd8eba2,0.35);	    
+						
+						FlxG.play(explosionSound);
 						
 						stats.increment("explosions");
 					}
@@ -269,7 +278,9 @@ package
 							createTiles();
 							
 							FlxG.camera.shake(0.005,0.35);
-							FlxG.camera.flash(0xffd8eba2,0.35);	   
+							FlxG.camera.flash(0xffd8eba2, 0.35);	
+							
+							FlxG.play(createPlatformSound);
 							
 							stats.increment("platforms");
 						}
