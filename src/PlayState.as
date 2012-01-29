@@ -459,7 +459,7 @@ package
 			
 			startEffects();
 			//create button
-			resetBtn=new FlxButton(FlxG.width-100,FlxG.height- 50,"Restart",OnRestartButtonClick);
+			resetBtn=new FlxButton(FlxG.width-100,FlxG.height- 150,"Restart",OnRestartButtonClick);
 			add(resetBtn);
 			
 			
