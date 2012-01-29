@@ -137,7 +137,6 @@ package
 			}
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
-<<<<<<< HEAD
 			canopies = new FlxGroup();
 			explosions = new FlxGroup();
 =======
