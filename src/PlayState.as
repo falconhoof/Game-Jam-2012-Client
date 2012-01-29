@@ -375,7 +375,6 @@ package
 			//var cam:FlxCamera = new FlxCamera(0,0, FlxG.width, FlxG.height); // we put the first one in the top left corner
 			// this sets the limits of where the camera goes so that it doesn't show what's outside of the tilemap
 			//cam.setBounds(0,0,FlxG.width, FlxG.height);
-			FlxG.camera.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
 			//FlxG.addCamera(cam);
 			
 			
@@ -389,6 +388,55 @@ package
 			statsTracker.trackItem("pickups");
 			statsTracker.setValue("levelId", levelId);
 
+			
+			startEffects();
+		}
+		
+		// Jon's function!
+		private function startEffects() : void {
+			FlxG.camera.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
+			
+			
+			var whitePixel:FlxParticle;
+			
+			//Here we actually initialize out emitter
+			//The parameters are        X   Y                Size (Maximum number of particles the emitter can store)
+			var theEmitter : FlxEmitter = new FlxEmitter(10, FlxG.height / 2, 200);
+			
+			//Now by default the emitter is going to have some properties set on it and can be used immediately
+			//but we're going to change a few things.
+			
+			//First this emitter is on the side of the screen, and we want to show off the movement of the particles
+			//so lets make them launch to the right.
+			theEmitter.setXSpeed(100, 200);
+			
+			//and lets funnel it a tad
+			theEmitter.setYSpeed( -50, 50);
+			
+			//Let's also make our pixels rebound off surfaces
+			theEmitter.bounce = .8;
+			
+			//Now let's add the emitter to the state.
+			add(theEmitter);
+			
+			//Now it's almost ready to use, but first we need to give it some pixels to spit out!
+			//Lets fill the emitter with some white pixels
+			for (var i:int = 0; i < theEmitter.maxSize/2; i++) {
+				whitePixel = new FlxParticle();
+				whitePixel.makeGraphic(2, 2, 0xFFFFFFFF);
+				whitePixel.visible = false; //Make sure the particle doesn't show up at (0, 0)
+				theEmitter.add(whitePixel);
+				whitePixel = new FlxParticle();
+				whitePixel.makeGraphic(1, 1, 0xFFFFFFFF);
+				whitePixel.visible = false;
+				theEmitter.add(whitePixel);
+			}
+			
+			//Now lets set our emitter free.
+			//Params:        Explode, Particle Lifespan, Emit rate(in seconds)
+			theEmitter.start(false, 3, .01);
+
+			
 		}
 		
 		override public function update():void
