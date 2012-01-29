@@ -11,6 +11,9 @@ package
 		[Embed(source = "../assets/Audio_CreatePlatform.mp3")] private var createPlatformSound:Class;
 		[Embed(source = "../assets/Audio_CreateTree.mp3")] private var createTreeSound:Class;
 		[Embed(source = "../assets/Audio_SpawnIn.mp3")] private var spawnInSound:Class;
+		[Embed(source = "../assets/Audio_Footstep.mp3")] private var footstepSound:Class;
+		
+		private var footstep:FlxSound;
 		
 		protected var _restart:Number;
 		protected var _gibs:FlxEmitter;
@@ -88,6 +91,8 @@ package
 			
 			FlxG.play(spawnInSound);
 			
+			footstep = new FlxSound();
+			footstep.loadEmbedded(footstepSound, true, true);
 		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
 			}
@@ -322,14 +327,17 @@ package
 			if(velocity.y != 0)
 			{
 				play("jump");
+				footstep.stop();
 			}
 			else if(velocity.x == 0)
 			{
 				play("idle");
+				footstep.stop();
 			}
 			else
 			{
 				play("run");
+				footstep.play();
 			}
 			
 		}
