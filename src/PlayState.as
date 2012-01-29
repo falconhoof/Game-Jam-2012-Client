@@ -31,15 +31,20 @@ package
 		// graphics
 		[Embed(source="../assets/bg_gradientA.png")] private var BgGradientA:Class;
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
+
 		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
 		[Embed(source = "../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
 		
 		[Embed(source = "../assets/Audio_Ambience.mp3")] private var ambientSound:Class;
 		private var ambientPlayback:FlxSound;
+
+		[Embed(source="../assets/fg_mistFX.png")] private static var FgMistClass:Class;
+		
+
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
-		private var fgSunlightGradient : FlxSprite;
+		private var fgMist : FlxSprite;
 		private var fgLetterbox : FlxSprite;
 		private var gradientA : FlxSprite;
 		
@@ -266,6 +271,8 @@ package
 			gradientA = new FlxSprite(0,0, BgGradientA);
 			gradientA.solid = false;
 			gradientA.moves = false;
+			gradientA.alpha = 1;
+			gradientA.blend = "multiply";
 			add(gradientA);
 			
 			//map=new MapMainMap();
@@ -314,12 +321,21 @@ package
 			highlightBox = new FlxObject(0, 0, TILE_WIDTH, TILE_HEIGHT);
 			*/
 			
+			fgMist = new FlxSprite(0, 0, FgMistClass);
+			fgMist.blend = "screen";
+			 add(fgMist);
+			fgMist.x = 100;
+			fgMist.y = -150;
+			fgMist.alpha = 0.5;
+			fgMist.angularVelocity = 10;
 			
 			/* add foreground stuff */
 			fgInverseVignette = new FlxSprite(0, 0, FgInverseVignetteClass);
 			fgInverseVignette.blend = "screen";
+			fgInverseVignette.alpha = 1;
 			add(fgInverseVignette);
 			
+		
 			
 			
 			// fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
