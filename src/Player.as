@@ -66,10 +66,10 @@ package
 			
 			jumpSpeed = 500;
 			//animations
-			addAnimation("idle", [2]);
-			addAnimation("run", [0, 1, 2, 3,4,5], 12);	
-			addAnimation("jump", [2]);
-			addAnimation("climbTree", [2,0,2,0,2,0,2,0], 6);
+			addAnimation("idle", [6]);
+			addAnimation("run", [4, 5, 0, 1, 2, 3], 25);	
+			addAnimation("jump", [7]);
+			addAnimation("climbTree", [3,4,7,4,3], 25);
 			
 		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
@@ -277,7 +277,7 @@ package
 			
 			kill();
 			FlxG.camera.shake(0.005,0.35);
-			FlxG.camera.flash(0xffd8eba2,0.35);
+			// FlxG.camera.flash(0xffd8eba2,0.35);
 			if(_gibs != null)
 			{
 				_gibs.at(this);
