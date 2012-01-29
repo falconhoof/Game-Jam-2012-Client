@@ -192,7 +192,7 @@ package
 			else
 			{
 				//FlxG.camera.fade(0xff000000,1,OnEndLevelFade);
-				FlxG.switchState(new SummaryState(levelId));	
+				FlxG.switchState(new SummaryState(levelId, statsTracker));	
 			}
 		}
 		

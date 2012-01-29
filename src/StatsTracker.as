@@ -17,11 +17,11 @@ package
 		public function StatsTracker()
 		{
 			trackedItems = new Array();
-			trackItem("username", "string");
+			/*trackItem("username", "string");
 			setString("username", "davidfarrell");
 			trackItem("email", "string");
 			setString("email", "dfarrell@davidlearnsgames.com");
-			
+		*/	
 		}
 		
 		public function trackItem( item : String, type : String = "number") : void {
