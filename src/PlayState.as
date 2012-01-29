@@ -399,17 +399,8 @@ package
 				FlxG.overlap(player, trees, climbTree);
 				FlxG.collide(player, trees);
 				
-				//we need check with each individual 
-				//sprites
-				for each(var p:Pickup in pickups)
-				{
-					if (player.overlaps(p))
-					{
-						p.visible=false;
-						//add to pick up score
-					}
-				}
-			
+				FlxG.overlap(player,pickups,HandlePickUps);
+				FlxG.collide(player, pickups);
 			
 				//If we have hit the exit
 				if(player.overlaps(exit))
@@ -434,6 +425,12 @@ package
 			}*/
 			
 			super.update();
+		}
+		
+		public function HandlePickUps(p:Player, pUp:Pickup):void
+		{
+			pUp.kill();
+			//TODO: Handle pickup logic, give some kind of metric
 		}
 		
 		public function climbTree(p:Player, treeToClimb:Tree):void
