@@ -6,7 +6,7 @@ package
 	import flash.net.URLRequest;
 	
 	import org.flixel.*;
-	import org.osmf.layout.AbsoluteLayoutFacet;
+	//import org.osmf.layout.AbsoluteLayoutFacet;
 	
 	public class PlayState extends FlxState
 	{
@@ -32,7 +32,10 @@ package
 		[Embed(source="../assets/bg_gradientA.png")] private var BgGradientA:Class;
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
 		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
-		[Embed(source="../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
+		[Embed(source = "../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
+		
+		[Embed(source = "../assets/Audio_Ambience.mp3")] private var ambientSound:Class;
+		private var ambientPlayback:FlxSound;
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
@@ -182,6 +185,8 @@ package
 			player.respawnsLeft = map.respawnsAllowed;
 			player.explosionsLeft = map.explosionsAllowed;
 			//endLevel=false;
+			ambientPlayback.loadEmbedded(ambientSound, true);
+			ambientPlayback.play();
 		}
 		
 		
@@ -190,7 +195,8 @@ package
 			//check to see if we have levels left
 			//if not go to exit screen(currently start screen)
 			//endLevel=true;
-
+			ambientPlayback.stop();
+			
 			levelId++;
 			statsTracker.submitStats();
 
@@ -232,7 +238,7 @@ package
 			//We only need to hide/show these
 			pickupScoreDisplay=new FlxGroup();
 			
-	
+			ambientPlayback = new FlxSound();
 			
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
