@@ -29,6 +29,7 @@ package
 		
 		
 		// graphics
+		[Embed(source="../assets/bg_gradientA.png")] private var BgGradientA:Class;
 		[Embed(source="../assets/fg_InverseVignette.png")] private static var FgInverseVignetteClass:Class;
 		[Embed(source="../assets/fg_SunlightGradient.png")] private static var FgSunlightGradientClass:Class;
 		[Embed(source="../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
@@ -37,6 +38,7 @@ package
 		private var fgInverseVignette : FlxSprite;
 		private var fgSunlightGradient : FlxSprite;
 		private var fgLetterbox : FlxSprite;
+		private var gradientA : FlxSprite;
 		
 		// movieclip
 		private var mcLoader:Loader = new Loader();
@@ -78,6 +80,9 @@ package
 		private var resetBtn:FlxButton;
 		private var quitBtn:FlxButton;
 		private var helperTxt:FlxText;
+		
+		
+		private var sacrificeText:FlxText;
 		
 		protected var _littleGibs:FlxEmitter;
 		
@@ -227,6 +232,8 @@ package
 			//We only need to hide/show these
 			pickupScoreDisplay=new FlxGroup();
 			
+	
+			
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
@@ -246,11 +253,18 @@ package
 			_littleGibs.bounce = 0.5;
 			_littleGibs.makeParticles(ImgGibs,100,10,true,0.5);
 			
-			add(_littleGibs);
+			// removing the gibs from the explosion because it sucks
+			// add(_littleGibs);  
+			
+			// add background gradient
+			gradientA = new FlxSprite(0,0, BgGradientA);
+			gradientA.solid = false;
+			gradientA.moves = false;
+			add(gradientA);
 			
 			//map=new MapMainMap();
 
-			map=new MapMainMap();
+			map=new TutorialOne();
 			levels.push(map);
 			
 			map=new MapDavidMap();
@@ -259,6 +273,7 @@ package
 
 			
 			OnStartLevel();
+			
 			
 			
 			
@@ -294,23 +309,15 @@ package
 			*/
 			
 			
-			
-			
-			
 			/* add foreground stuff */
 			fgInverseVignette = new FlxSprite(0, 0, FgInverseVignetteClass);
 			fgInverseVignette.blend = "screen";
 			add(fgInverseVignette);
 			
-			/*fgSunlightGradient = new FlxSprite(0, 0, FgSunlightGradientClass);
-			fgSunlightGradient.blend = "multiply";
-			fgSunlightGradient.alpha = 0.5;
-			add(fgSunlightGradient);*/
 			
 			
-			
-			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
-			add(fgLetterbox);
+			// fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
+			// add(fgLetterbox);
 			
 			
 			/*
@@ -399,24 +406,23 @@ package
 		
 		// Jon's function!
 		private function startEffects() : void {
-			FlxG.camera.color = 0xB3DEEF; // add a light red tint to the camera to differentiate it from the other
-			
+			// FlxG.camera.color = 0xecfbff; // add a light red tint to the camera to differentiate it from the other
 			
 			var whitePixel:FlxParticle;
 			
 			//Here we actually initialize out emitter
 			//The parameters are        X   Y                Size (Maximum number of particles the emitter can store)
-			var theEmitter : FlxEmitter = new FlxEmitter(10, FlxG.height / 2, 200);
+			var theEmitter : FlxEmitter = new FlxEmitter(FlxG.width/2, -500 , 400);
 			
 			//Now by default the emitter is going to have some properties set on it and can be used immediately
 			//but we're going to change a few things.
 			
 			//First this emitter is on the side of the screen, and we want to show off the movement of the particles
 			//so lets make them launch to the right.
-			theEmitter.setXSpeed(100, 200);
+			theEmitter.setXSpeed(-100, 100);
 			
 			//and lets funnel it a tad
-			theEmitter.setYSpeed( -50, 50);
+			theEmitter.setYSpeed( -400, 400);
 			
 			//Let's also make our pixels rebound off surfaces
 			theEmitter.bounce = .8;
@@ -428,19 +434,27 @@ package
 			//Lets fill the emitter with some white pixels
 			for (var i:int = 0; i < theEmitter.maxSize/2; i++) {
 				whitePixel = new FlxParticle();
-				whitePixel.makeGraphic(2, 2, 0xFFFFFFFF);
+				whitePixel.makeGraphic(3, 3, 0xFFd9e2e5);
 				whitePixel.visible = false; //Make sure the particle doesn't show up at (0, 0)
 				theEmitter.add(whitePixel);
 				whitePixel = new FlxParticle();
-				whitePixel.makeGraphic(1, 1, 0xFFFFFFFF);
+				whitePixel.makeGraphic(2, 2, 0xFFFFFFFF);
 				whitePixel.visible = false;
 				theEmitter.add(whitePixel);
 			}
 			
 			//Now lets set our emitter free.
 			//Params:        Explode, Particle Lifespan, Emit rate(in seconds)
-			theEmitter.start(false, 3, .01);
+			theEmitter.start(false, 5, .01);
 
+			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
+			add(fgLetterbox);
+			
+			sacrificeText = new FlxText(25,FlxG.height- 25,800,"Current Sacrifice: " + player.getSacrifice());
+			sacrificeText.size = 16;
+			sacrificeText.alignment = "left";
+			sacrificeText.color=0xFFffffff;
+			add(sacrificeText);
 			
 		}
 		
@@ -541,7 +555,20 @@ package
 		
 		public override function draw():void
 		{
+			var sacrificeLeft : String = "";
+			
+			if ( player.getSacrifice() == "Trees") {
+				sacrificeLeft = ""+player.treesLeft;
+			} else if ( player.getSacrifice() == "Explosions") {
+				sacrificeLeft = ""+player.explosionsLeft;
+			} if ( player.getSacrifice() == "Platforms") {
+				sacrificeLeft = ""+player.platformsLeft;
+			} 
+			
+			sacrificeText.text = "Current Sacrifice: " + player.getSacrifice() + " ( "+ sacrificeLeft +" remaining)";
+			
 			super.draw();
+			
 		}
 		
 		private function setupPlayer():void
