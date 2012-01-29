@@ -26,41 +26,51 @@ package
 			t.size = 32;
 			t.alignment = "center";
 			add(t);
-			t = new FlxText(FlxG.width/2-100,200,200,"You completed the level using: ");
+			t = new FlxText(400,200,400,"You completed the level using: ");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
 			
-			t = new FlxText(FlxG.width/2-100,350,200, statsTracker.getValue("explosions") + " explosions");
+			t = new FlxText(450,250,200, statsTracker.getValue("explosions") + " explosions");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,400,200, statsTracker.getValue("trees") + " trees");
+			t = new FlxText(450,290,200, statsTracker.getValue("trees") + " trees");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,450,200, statsTracker.getValue("platforms") + " platforms");
+			t = new FlxText(450,320,200, statsTracker.getValue("platforms") + " platforms");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,500,200, statsTracker.getValue("spawn_points") + " spawn points");
+			t = new FlxText(450,360,200, statsTracker.getValue("spawn_points") + " spawn points");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
+			t.color=0xFF000000;
+			add(t);
+			
+			var successString : String = "You failed to retrieve the soul gem";
+			if ( statsTracker.getValue("pickups") > 0) {
+				successString = "You retrieved the soul gem";
+			}
+			t = new FlxText(400,520,800, successString);
+			t.size = 32;
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
 			
 			t = new FlxText(FlxG.width/2-100,600,200,"Press any Key");
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			

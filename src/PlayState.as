@@ -446,6 +446,8 @@ package
 		public function HandlePickUps(p:Player, pUp:Pickup):void
 		{
 			pUp.kill();
+			
+			statsTracker.increment("pickups");
 			//TODO: Handle pickup logic, give some kind of metric
 		}
 		

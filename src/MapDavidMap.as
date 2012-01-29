@@ -21,16 +21,16 @@ package  {
 			layerMainGame.y = 0;
 			layerMainGame.scrollFactor.x = 1.000000;
 			layerMainGame.scrollFactor.y = 1.000000;
-
+			
 			allLayers = [ layerMainGame ];
-
-
+			
+			
 			boundsMinX = 0;
 			boundsMinY = 0;
 			boundsMaxX = 1280;
 			boundsMaxY = 704;
 		}
-
+		
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
@@ -46,14 +46,20 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
+			obj = new Pickup(242, 126);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);
 		}
-
+		
 		override public function customFunction(param:* = null):* {
-
+			
 		}
-
+		
 		private function _setCustomValues():void {
 		}
-
+		
 	}
 }
