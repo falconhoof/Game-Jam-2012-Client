@@ -34,6 +34,9 @@ package
 		public var platformsLeft : Number;
 		public var respawnsLeft : Number;
 		
+		public var sacrifices : Array;
+		public var currentSacrifice : Number;
+		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
@@ -71,6 +74,12 @@ package
 			addAnimation("jump", [7]);
 			addAnimation("climbTree", [3,4,7,4,3], 25);
 			
+			sacrifices = new Array();
+			sacrifices.push("Trees");
+			sacrifices.push("Platforms");
+			sacrifices.push("Explosions");
+			currentSacrifice = 0;
+			
 		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
 			}
@@ -84,6 +93,10 @@ package
 		}
 		
 		
+		public function getSacrifice() : String {
+			
+			return sacrifices[currentSacrifice];
+		}
 		
 		public function setTileMap(collisionMap:FlxTilemap):void
 		{
@@ -165,6 +178,7 @@ package
 				y -= 1;
 				velocity.y = -jumpSpeed;
 			}
+			/*
 			if(FlxG.keys.justPressed("Q"))
 			{
 				if ( explosionsLeft > 0 ) {
@@ -192,7 +206,7 @@ package
 					}
 					
 				}
-			}
+			}*/
 			if(FlxG.keys.justPressed("E"))
 			{
 				if ( respawnsLeft > 0 ) {
@@ -205,6 +219,7 @@ package
 					stats.increment("spawn_points");
 				}
 			}
+			/*
 			if(FlxG.keys.justPressed("R"))
 			{
 				if ( treesLeft > 0 ) {
@@ -216,6 +231,51 @@ package
 	
 					stats.increment("trees");
 				}
+			}*/
+			
+			if ( FlxG.keys.justPressed("SHIFT") ) {
+				currentSacrifice ++;
+				if ( currentSacrifice > (sacrifices.length-1)) {
+					currentSacrifice = 0;
+				}
+			}
+			
+			if ( FlxG.keys.justPressed("SPACE")) {
+				if ( sacrifices[currentSacrifice] == "Trees" ) {
+					if ( treesLeft > 0 ) {
+						treesLeft--;
+						createTree();
+						
+						FlxG.camera.shake(0.005,0.35);
+						FlxG.camera.flash(0x11ff11a2,0.35);	
+						
+						stats.increment("trees");
+					}
+				} else if ( sacrifices[currentSacrifice] == "Explosions") {
+					if ( explosionsLeft > 0 ) {
+						explosionsLeft--;
+						explode(4);
+						
+						FlxG.camera.shake(0.005,0.35);
+						FlxG.camera.flash(0xffd8eba2,0.35);	    
+						
+						stats.increment("explosions");
+					}
+				} else if ( sacrifices[currentSacrifice] == "Platforms") {
+					if (canCreate())
+					{
+						if ( platformsLeft > 0 ) {
+							platformsLeft --;
+							createTiles();
+							
+							FlxG.camera.shake(0.005,0.35);
+							FlxG.camera.flash(0xffd8eba2,0.35);	   
+							
+							stats.increment("platforms");
+						}
+						
+					}
+				} 
 			}
 			
 			if(velocity.y != 0)
@@ -230,6 +290,7 @@ package
 			{
 				play("run");
 			}
+			
 		}
 		
 		override public function hurt(Damage:Number):void

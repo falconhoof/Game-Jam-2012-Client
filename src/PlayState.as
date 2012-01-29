@@ -81,6 +81,9 @@ package
 		private var quitBtn:FlxButton;
 		private var helperTxt:FlxText;
 		
+		
+		private var sacrificeText:FlxText;
+		
 		protected var _littleGibs:FlxEmitter;
 		
 		public var tutorialTriggers : Array;
@@ -546,7 +549,13 @@ package
 		
 		public override function draw():void
 		{
+			sacrificeText = new FlxText(25,FlxG.height- 25,400,"Current Sacrifice: " + player.getSacrifice());
+			sacrificeText.size = 16;
+			sacrificeText.alignment = "left";
+			sacrificeText.color=0xFFffffff;
+			add(sacrificeText);
 			super.draw();
+			
 		}
 		
 		private function setupPlayer():void
