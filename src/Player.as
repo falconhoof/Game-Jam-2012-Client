@@ -212,7 +212,7 @@ package
 			if(FlxG.keys.justPressed("UP") && canClimb)
 			{
 				//climb tree
-				climbTree();
+				//climbTree();
 				
 			}
 			else if(FlxG.keys.justPressed("UP") && velocity.y == 0)
@@ -496,16 +496,17 @@ package
 			tree.play("grow");
 		}
 
-		public function climbTree():void
+		public function climbTree(tree:Tree):void
 		{
 			keyboardInputEnabled = false;
-			
+			FlxG.log("Climbing Tree "+tree);
+			treeToClimb=tree;
 			treeClimbSprite=new TreeClimbSprite(0,0);
 			treeClimbSprite.x=treeToClimb.x;
-			treeClimbSprite.y=treeToClimb.y;
+			treeClimbSprite.y=treeToClimb.y-64;
 			
 			FlxG.state.add(treeClimbSprite);
-			treeToClimb.visible=false;
+			//treeToClimb.visible=false;
 			
 			treeClimbSprite.addAnimationCallback(treeAnimationDone);
 			
@@ -529,24 +530,21 @@ package
 		
 		function treeAnimationDone(name:String,frameNo:uint,frameIndex:uint):void
 		{
-			if (name=="Climb")
-			{
-				if (frameIndex==8)
+				if (frameIndex==7)
 				{
 					
-					treeToClimb.visible=true;
-					solid = false;
-					treeToClimb.canopy.solid = false;
+					//treeToClimb.visible=true;
+
+				
 					y = treeToClimb.y - this.height - 20 ;
-					treeToClimb.canopy.solid = true;
-					solid = true;
+			
 					//	treeToClimb.y;
-					keyboardInputEnabled = true;
+		
 					treeClimbSprite.visible=false;
 					this.visible=true;
 					FlxG.state.remove(treeClimbSprite);
 				}
-			}
+			
 		}
 		
 		override public function kill():void

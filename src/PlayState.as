@@ -616,6 +616,7 @@ package
 		
 		public function climbTree(p:Player, treeToClimb:Tree):void
 		{
+			FlxG.log("Climb Tree in play state"+treeToClimb);
 			player.play("climbTree");
 			if (player.y > treeToClimb.y -5)
 			{
@@ -624,6 +625,8 @@ package
 			}
 			//player.canClimb = true;
 			//player.treeToClimb = treeToClimb;
+			FlxG.log("Climb Tree in play state, climbing tree"+treeToClimb);
+			player.climbTree(treeToClimb);
 		}
 
 		public function plantTreeFirmly(tree:Tree, m:FlxTilemap):void
