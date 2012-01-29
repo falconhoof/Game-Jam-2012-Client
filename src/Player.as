@@ -95,7 +95,7 @@ package
 			exists = true;
 			visible = true;
 			solid = true;
-			velocity.y = 0;
+			velocity.y = -400;
 			_restart = 0;
 		}
 		
@@ -185,7 +185,7 @@ package
 				FlxG.camera.shake(0.005,0.35);
 				FlxG.camera.flash(0xffffeba2,0.35);	
 				
-				stats.increment("spawn points");
+				stats.increment("spawn_points");
 			}
 			if(FlxG.keys.justPressed("R"))
 			{

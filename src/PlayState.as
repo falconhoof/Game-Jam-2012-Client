@@ -208,7 +208,8 @@ package
 		
 		public function OnEndGame():void
 		{
-			FlxG.switchState(new MenuState());	
+			FlxG.switchState(new EndGameState(statsTracker));
+			//FlxG.switchState(new MenuState());	
 		}
 		
 		override public function create():void
