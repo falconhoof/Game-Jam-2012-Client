@@ -51,13 +51,13 @@ package
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
-			
+		/*	
 			t = new FlxText(450,360,200, statsTracker.getValue("spawn_points") + " spawn points");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
-			
+			*/
 			var successString : String = "You failed to retrieve the soul gem";
 			if ( statsTracker.getValue("pickups") > 0) {
 				successString = "You retrieved the soul gem";
