@@ -6,7 +6,8 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../assets/char_walkR.png")] protected var ImgSpaceman:Class;
+		[Embed(source = "../assets/char_walkR.png")] protected var ImgSpaceman:Class;
+		[Embed(source = "../assets/Audio_Explosion.mp3")] private var explosionSound:Class;
 		
 		
 		protected var _restart:Number;
@@ -172,7 +173,7 @@ package
 					
 					FlxG.camera.shake(0.005,0.35);
 					FlxG.camera.flash(0xffd8eba2,0.35);	    
-					                
+					FlxG.play(explosionSound, 1.0);
 					stats.increment("explosions");
 				}
 			}
