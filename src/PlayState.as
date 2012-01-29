@@ -41,7 +41,10 @@ package
 
 		[Embed(source="../assets/fg_mistFX.png")] private static var FgMistClass:Class;
 		
-
+		//Power UI Assets
+		[Embed(source="../assets/ui_explodeIcon.png")] private static var explodeIconClass:Class;
+		[Embed(source="../assets/ui_platformIcon.png")] private static var platformIconClass:Class;
+		[Embed(source="../assets/ui_treeIcon.png")] private static var treeIcon:Class;
 		
 		// graphics classes
 		private var fgInverseVignette : FlxSprite;
@@ -86,12 +89,14 @@ package
 		protected var explosions:FlxGroup;
 		protected var pickups:FlxGroup;
 		protected var pickupScoreDisplay:FlxGroup;
+		protected var iconDisplay:FlxGroup;
 
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
 		private var resetBtn:FlxButton;
 		private var quitBtn:FlxButton;
 		private var helperTxt:FlxText;
+		private var lastSacrifice:Number=0;
 		
 		
 		private var sacrificeText:FlxText;
@@ -456,7 +461,31 @@ package
 			//create button
 			resetBtn=new FlxButton(FlxG.width-100,FlxG.height- 50,"Restart",OnRestartButtonClick);
 			add(resetBtn);
+			
+			
+			iconDisplay=new FlxGroup();
+			var pUISprite:PowerUISprite=new PowerUISprite(32,FlxG.height- 260);
+			pUISprite.loadGraphic(treeIcon,true,false,128,128,false);
+			pUISprite.play("Idle");
+			iconDisplay.add(pUISprite);
+			
+			pUISprite=new PowerUISprite(32,FlxG.height- 260);
+			pUISprite.loadGraphic(platformIconClass,true,false,128,128,false);
+			pUISprite.play("Idle");
+			pUISprite.visible=false;
+			iconDisplay.add(pUISprite);
+			
+			pUISprite=new PowerUISprite(32,FlxG.height- 260);
+			pUISprite.loadGraphic(explodeIconClass,true,false,128,128,false);
+			pUISprite.play("Idle");
+			pUISprite.visible=false;
+			
+			iconDisplay.add(pUISprite);
+			add(iconDisplay);
+			
 			FlxG.mouse.show();
+			
+			
 		}
 		
 		// Jon's function!
@@ -505,12 +534,21 @@ package
 			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
 			add(fgLetterbox);
 			
-			sacrificeText = new FlxText(25,FlxG.height- 25,800,"Current Sacrifice: " + player.getSacrifice());
+			sacrificeText = new FlxText(170,FlxG.height- 204,800,"0");
 			sacrificeText.size = 16;
 			sacrificeText.alignment = "left";
-			sacrificeText.color=0xFFffffff;
+			sacrificeText.color=0xFF000000;
 			add(sacrificeText);
 			
+		}
+		
+		public function switchPowerUI(current:Number):void
+		{
+			var uiElement:PowerUISprite=iconDisplay.members[lastSacrifice];
+			uiElement.visible=false;
+			lastSacrifice=current;
+			uiElement=iconDisplay.members[current];
+			uiElement.Play();
 		}
 		
 		override public function update():void
@@ -622,7 +660,7 @@ package
 				sacrificeLeft = ""+player.platformsLeft;
 			} 
 			
-			sacrificeText.text = "Current Sacrifice: " + player.getSacrifice() + " ( "+ sacrificeLeft +" remaining)";
+			sacrificeText.text = "Sacrifices: " + sacrificeLeft;
 			
 			super.draw();
 			

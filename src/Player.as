@@ -277,7 +277,11 @@ package
 				currentSacrifice ++;
 				if ( currentSacrifice > (sacrifices.length-1)) {
 					currentSacrifice = 0;
+					//tell play state to shift icon
+
 				}
+				var playState=FlxG.state as PlayState;
+				playState.switchPowerUI(currentSacrifice);
 			}
 			
 			if ( FlxG.keys.justPressed("SPACE")) {
