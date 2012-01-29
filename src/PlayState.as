@@ -80,6 +80,7 @@ package
 		private var player:Player;
 		
 		private var exit:Exit;
+		private var exitTransition:Boolean;
 		protected var trees:FlxGroup;
 		public var canopies:FlxGroup;
 		protected var explosions:FlxGroup;
@@ -195,7 +196,7 @@ package
 			//endLevel=false;
 			ambientPlayback.loadEmbedded(ambientSound, true);
 			ambientPlayback.play();
-			
+			FlxG.flash(0xFFFFFF,1);
 
 		}
 		
@@ -223,19 +224,29 @@ package
 
 			if (levelId>levels.length-1)
 			{
-				OnEndGame();
+				//fade for second before End screen
+				FlxG.fade(0xFFFFFFFF,1,OnEndGame);
 			}
 			else
 			{
-				//FlxG.camera.fade(0xff000000,1,OnEndLevelFade);
-				FlxG.switchState(new SummaryState(levelId, statsTracker));	
+				//set flag to prevent exit collision being detected multiple times when fading
+				exitTransition = true;
+				//fade for second before summary screen
+				FlxG.fade(0xFFFFFFFF,1,switchToSummary);	
 			}
+		}
+
+		public function switchToSummary():void
+		{
+			
+			FlxG.switchState(new SummaryState(levelId, statsTracker));
 		}
 		
 		public function OnEndLevelFade():void
 		{
 			FlxG.camera.fade(0xFFFFFFFF,1,OnStartFadeDone,true);
 		}
+		
 		
 		public function OnStartFadeDone():void
 		{
@@ -529,7 +540,7 @@ package
 				FlxG.collide(player, pickups);
 			
 				//If we have hit the exit
-				if(player.overlaps(exit))
+				if(player.overlaps(exit) && !exitTransition)
 				{
 					//FlxG.switchState(new MenuState());
 					OnEndLevel();

@@ -21,6 +21,9 @@ package
 		protected var keyboardInputEnabled:Boolean;
 		public var treeToClimb:Tree;
 		public var canClimb:Boolean;
+		protected var spawnSprite:PlayerSpawn;
+		protected var spawning:Boolean;
+		protected var spawnTimer: Number;
 		
 		private var jumpSpeed : Number;
 		private var runSpeed : Number;
@@ -50,6 +53,7 @@ package
 			spawnY = closestTilePos(Y) + 31;
 			loadGraphic(ImgSpaceman,true,true,32,64);
 			_restart = 0;
+			spawnTimer = 0;
 			canClimb = false;
 			keyboardInputEnabled = true;
 			
@@ -114,16 +118,42 @@ package
 		
 		public function respawn():void
 		{
-			
+			//	spawnTimer = new FlxTimer();
 			x = spawnX;
-			y = spawnY;
+			y = spawnY ;
+				
+			respawnAnimation();		
+			spawnTimer += FlxG.elapsed;
+			if(spawnTimer > 1.8)
+			{	
+				respawnCharacter();		
+			}		
+		}
+		
+		public function respawnAnimation():void
+		{
+			//spawn animation
+			if (!spawning)
+			{
+				spawning = true;
+				spawnSprite = new PlayerSpawn(spawnX -48,spawnY-48);
+				FlxG.state.add(spawnSprite);
+				spawnSprite.play("spawn");
+			}
+		}
+		
+		public function respawnCharacter():void
+		{
+			spawning = false;
 			alive = true;
+			solid = true;
 			exists = true;
 			visible = true;
-			solid = true;
+			FlxG.play(spawnInSound);
 			velocity.y = -400;
 			_restart = 0;
-			FlxG.play(spawnInSound);
+			spawnTimer = 0;
+			FlxG.state.remove(spawnSprite);
 		}
 		
 		override public function destroy():void
