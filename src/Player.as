@@ -45,6 +45,8 @@ package
 		public var sacrifices : Array;
 		public var currentSacrifice : Number;
 		
+		public var treeClimbSprite:TreeClimbSprite;
+		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
@@ -93,6 +95,8 @@ package
 			
 			footstep = new FlxSound();
 			footstep.loadEmbedded(footstepSound, true, true);
+			
+
 		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
 			}
@@ -464,17 +468,54 @@ package
 		public function climbTree():void
 		{
 			keyboardInputEnabled = false;
-			play("climbTree");
+			
+			treeClimbSprite=new TreeClimbSprite(0,0);
+			treeClimbSprite.x=treeToClimb.x;
+			treeClimbSprite.y=treeToClimb.y;
+			
+			FlxG.state.add(treeClimbSprite);
+			treeToClimb.visible=false;
+			
+			treeClimbSprite.addAnimationCallback(treeAnimationDone);
+			
+			this.visible=false;
+			treeClimbSprite.play("Climb");
+			
+			
+			//Comment out put back in animation is feckered
+			//play("climbTree");
 			
 			//when animation finished teleport to top of tree
-			solid = false;
-			treeToClimb.canopy.solid = false;
-			y = treeToClimb.y - this.height - 20 ;
-			treeToClimb.canopy.solid = true;
-			solid = true;
+			//solid = false;
+			//treeToClimb.canopy.solid = false;
+			//y = treeToClimb.y - this.height - 20 ;
+			//treeToClimb.canopy.solid = true;
+			//solid = true;
 		//	treeToClimb.y;
-			keyboardInputEnabled = true;
+			//keyboardInputEnabled = true;
 			
+		}
+		
+		function treeAnimationDone(name:String,frameNo:uint,frameIndex:uint):void
+		{
+			if (name=="Climb")
+			{
+				if (frameIndex==8)
+				{
+					
+					treeToClimb.visible=true;
+					solid = false;
+					treeToClimb.canopy.solid = false;
+					y = treeToClimb.y - this.height - 20 ;
+					treeToClimb.canopy.solid = true;
+					solid = true;
+					//	treeToClimb.y;
+					keyboardInputEnabled = true;
+					treeClimbSprite.visible=false;
+					this.visible=true;
+					FlxG.state.remove(treeClimbSprite);
+				}
+			}
 		}
 		
 		override public function kill():void
