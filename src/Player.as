@@ -409,7 +409,7 @@ package
 		public function createTiles():void
 		{
 			var platformHeight:int = (y / tileSize) + 1;
-			
+			/*
 			if (facing == FlxObject.RIGHT)
 			{
 				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
@@ -423,7 +423,20 @@ package
 				_map.setTile((x - width) / tileSize, platformHeight, FLAT_TILE);
 				_map.setTile((x - (width * 2)) / tileSize, platformHeight, FLAT_TILE);
 				_map.setTile((x - (width * 3)) / tileSize, platformHeight, FLAT_TILE);
-			}
+			}*/
+			
+			//   O
+			// XXXXX
+			// block of 5 tiles, centred on player
+			_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+			//one to each side
+			_map.setTile((x+tileSize+1) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x-tileSize) / tileSize,  platformHeight, FLAT_TILE);
+			//second on each side
+			 _map.setTile((x+(tileSize *2)) / tileSize,  platformHeight, FLAT_TILE);
+			_map.setTile((x-(tileSize *2)) / tileSize, platformHeight, FLAT_TILE);
+
+			
 			
 			kill();
 			FlxG.camera.shake(0.001,0.35);
@@ -485,10 +498,10 @@ package
 			var closestTileX:Number = closestTilePos(x);
 			var closestTileY:Number = closestTilePos(y) - 32;
 			
-			var creationLeftX:int = x - 128;
-			var creationRightX:int = x + 160;
+			var creationLeftX:int = x - 96;
+			var creationRightX:int = x + 96;
 			
-			if (this._facing == FlxObject.RIGHT)
+			/*if (this._facing == FlxObject.RIGHT)
 			{
 				if (spawnX < closestTileX || spawnX > creationRightX)
 				{
@@ -512,6 +525,15 @@ package
 						return true;
 					}
 				}
+			}
+			*/
+			if (spawnX < creationLeftX || spawnX > creationRightX)
+			{
+				return true;
+			}
+			else if ((closestTileY + 32) < spawnY - 65 || (closestTileY + 32) > spawnY + 65)
+			{
+				return true;
 			}
 			
 			return allowCreate;
