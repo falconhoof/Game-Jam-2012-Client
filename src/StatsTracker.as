@@ -3,6 +3,8 @@ package
 	import com.adobe.serialization.json.JSON;
 	
 	import flash.display.Sprite;
+	import flash.net.URLRequest;
+	import flash.net.URLVariables;
 	
 	import org.flixel.*;
 	
@@ -14,6 +16,11 @@ package
 		public function StatsTracker()
 		{
 			trackedItems = new Array();
+			trackItem("username", "string");
+			setString("username", "davidfarrell");
+			trackItem("email", "string");
+			setString("email", "dfarrell@davidlearnsgames.com");
+			
 		}
 		
 		public function trackItem( item : String, type : String = "number") : void {
@@ -110,6 +117,11 @@ package
 		public function submitStats() : void {
 			var submitVars : String = serialize();
 			var url : String = "http://falconhoof.heroku.com/api/v1/stats/";
+			
+			var request: URLRequest = new URLRequest(url);
+			var requestVars : URLVariables = new URLVariables();
+			
+			
 		}
 	}
 }
