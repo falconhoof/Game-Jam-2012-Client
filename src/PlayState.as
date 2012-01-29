@@ -86,6 +86,11 @@ package
 		
 		public var endLevel:Boolean=false;
 		
+		public function PlayState(level:Number)
+		{
+			levelId=level;
+		}
+		
 		//Callback function to retrieve sprites from map
 		protected function onMapAddCallback(spr:FlxSprite):void
 		{
@@ -99,6 +104,8 @@ package
 			else if(spr is TutorialTrigger)
 			{
 				tutorialTriggers.push(spr as TutorialTrigger);
+				//create text element and add
+				//it to the 
 			}
 			else if (spr is Tree)
 			{
@@ -114,8 +121,6 @@ package
 		public function OnStartLevel():void
 		{
 
-
-			
 			if (player!=null){
 				player.active=false;
 			}
@@ -126,17 +131,21 @@ package
 				exit.active=false;
 			}
 			
-			remove(collisionMap);
-			remove(player);
-			remove(exit);
+
 			for each(var t:TutorialTrigger in tutorialTriggers)
 			{
 				remove(t);
 			}
 			for each(var tree:Tree in trees)
 			{
+				tree.kill();
 				remove(tree);
 			}
+			remove(collisionMap);
+			remove(player);
+			remove(exit);
+			remove(trees);
+			
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
 
@@ -161,9 +170,8 @@ package
 			add(map.layerMainGame);
 			collisionMap=map.layerMainGame;		
 			
-			levelId++;
-			setupPlayer();
 			
+			setupPlayer();	
 			//endLevel=false;
 		}
 		
@@ -173,6 +181,7 @@ package
 			//check to see if we have levels left
 			//if not go to exit screen(currently start screen)
 			//endLevel=true;
+			levelId++;
 			if (levelId>levels.length-1)
 			{
 				OnEndGame();
@@ -180,7 +189,7 @@ package
 			else
 			{
 				//FlxG.camera.fade(0xff000000,1,OnEndLevelFade);
-				OnStartLevel();
+				FlxG.switchState(new SummaryState(levelId));	
 			}
 		}
 		
@@ -230,9 +239,6 @@ package
 			_littleGibs.makeParticles(ImgGibs,100,10,true,0.5);
 			
 			add(_littleGibs);
-			
-			//load first map
-			levelId = 0;
 			
 			//map=new MapMainMap();
 
@@ -374,6 +380,13 @@ package
 			statsTracker.trackItem("platforms");
 			statsTracker.trackItem("spawn points");
 			statsTracker.trackItem("trees");
+			
+			//triggerText=new FlxText(0,FlxG.height/2-20,FlxG.width,"Hello");
+			//triggerText.color=0xFF000000;
+			//triggerText.size=40;
+			//triggerText.alignment = "center";
+			//add(triggerText);
+	
 		}
 		
 		override public function update():void
@@ -390,7 +403,7 @@ package
 				{
 					if (player.overlaps(t))
 					{
-						t.ShowMessage();
+						t.ShowMessage();					
 					}
 					else
 					{

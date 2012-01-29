@@ -34,12 +34,7 @@ package  {
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
 			
-			obj = new Player(64, 272);;
-			obj.x+=obj.offset.x;
-			obj.y+=obj.offset.y;
-			FlxG.state.add(obj);
-			if(onAddCallback != null)
-				onAddCallback(obj);
+
 			obj = new CreateTutorialTrigger(192, 272);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
@@ -64,6 +59,12 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
+			obj = new Player(64, 272);;
+			obj.x+=obj.offset.x;
+			obj.y+=obj.offset.y;
+			FlxG.state.add(obj);
+			if(onAddCallback != null)
+				onAddCallback(obj);			
 		}
 
 		override public function customFunction(param:* = null):* {

@@ -1,10 +1,17 @@
 package
 {
 	import org.flixel.*;
-
-	public class MenuState extends FlxState
+	
+	public class SummaryState extends FlxState
 	{
-		[Embed(source="../assets/mainMenuBackground.png")] private static var ImgBackground:Class;
+		[Embed(source="../assets/summaryBackground.png")] private static var ImgBackground:Class;
+		
+		private var currentLevel:Number=0;
+		
+		public function SummaryState(levelIndex:Number):void
+		{
+				currentLevel=levelIndex;
+		}
 		
 		override public function create():void
 		{
@@ -12,7 +19,7 @@ package
 			add(background);
 			
 			var t:FlxText;
-			t = new FlxText(0,FlxG.height/2-20,FlxG.width,"Rebirth");
+			t = new FlxText(0,FlxG.height/2-20,FlxG.width,"Summary");
 			t.color=0xFF000000;
 			t.size = 32;
 			t.alignment = "center";
@@ -25,18 +32,18 @@ package
 			
 			FlxG.mouse.hide();
 		}
-
+		
 		override public function update():void
 		{
 			super.update();
-
+			
 			if(FlxG.mouse.justPressed())
-				FlxG.switchState(new PlayState(0));
+				FlxG.switchState(new PlayState(currentLevel));
 			
 			if (FlxG.keys.any() ) {
-				FlxG.switchState(new PlayState(0));
+				FlxG.switchState(new PlayState(currentLevel));
 				
 			}
-		}
+		}		
 	}
 }

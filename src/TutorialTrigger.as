@@ -23,23 +23,19 @@ package
 			tutorialMessage.x=this.x+this.width;
 			tutorialMessage.y=this.y-tutorialMessage.height/2;
 			tutorialMessage.visible=false;
-			tutorialMessage.messageDisplay.x=tutorialMessage.x;
-			tutorialMessage.messageDisplay.y=tutorialMessage.y;
 			FlxG.state.add(tutorialMessage);			
 		}
 		
 		public function ShowMessage():void
 		{
 			//trigger open anim
-			//tutorialMessage.visible=true;
-			tutorialMessage.messageDisplay.visible=true;
+			tutorialMessage.visible=true;
 		}
 		
 		public function HideMessage():void
 		{
 			//triger close
-			//tutorialMessage.visible=false;
-			tutorialMessage.messageDisplay.visible=false;
+			tutorialMessage.visible=false;
 		}
 	}
 }
