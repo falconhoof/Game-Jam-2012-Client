@@ -49,29 +49,32 @@ package
 			offset.y = 1;
 			
 			//basic player physics
-		/*	runSpeed = 160;
+			runSpeed = 160;
 			drag.x = runSpeed*15;
 			acceleration.y = 2000;
 			maxVelocity.x = runSpeed;
+			
+			
 			jumpSpeed = 500;
-		*/	
 			//animations
 			addAnimation("idle", [2]);
 			addAnimation("run", [0, 1, 2, 3,4,5], 12);	
 			addAnimation("jump", [2]);
 			addAnimation("climbTree", [2,0,2,0,2,0,2,0], 6);
 			
-			if ( FlxG.getPlugin(FlxControl) == null) {
+		/*	if ( FlxG.getPlugin(FlxControl) == null) {
 				FlxG.addPlugin(new FlxControl);
 			}
 			FlxControl.create(this, FlxControlHandler.MOVEMENT_INSTANT, FlxControlHandler.STOPPING_INSTANT, 1, true, true);
-			FlxControl.player1.setJumpButton("Up", FlxControlHandler.KEYMODE_JUST_DOWN, 200, FlxObject.FLOOR & FlxObject.CEILING, 250, 200);
+			//FlxControl.player1.setJumpButton("UP", FlxControlHandler.KEYMODE_JUST_DOWN, 50000, FlxObject.FLOOR & FlxObject.CEILING, 250, 200);
 			
-			FlxControl.player1.setJumpButton("SPACE", FlxControlHandler.KEYMODE_PRESSED, 200, FlxObject.FLOOR, 250, 200);
-			FlxControl.player1.setMovementSpeed(400, 0, 100, 200, 400, 0);
+			//FlxControl.player1.setJumpButton("SPACE", FlxControlHandler.KEYMODE_PRESSED, 200, FlxObject.FLOOR, 250, 200);
+			FlxControl.player1.setMovementSpeed(400, 0, 100, 400, 400, 0);
 			FlxControl.player1.setGravity(0, 40000);
-			
+			//FlxControl.player1.setMaximumSpeed(200,400000);*/
 		}
+		
+		
 		
 		public function setTileMap(collisionMap:FlxTilemap):void
 		{
@@ -85,6 +88,7 @@ package
 		
 		public function respawn():void
 		{
+			
 			x = spawnX;
 			y = spawnY;
 			alive = true;
@@ -124,7 +128,7 @@ package
 			}
 			
 			//MOVEMENT
-			/*
+			
 			acceleration.x = 0;
 			if(FlxG.keys.LEFT)
 			{
@@ -146,7 +150,12 @@ package
 			{
 				y -= 1;
 				velocity.y = -jumpSpeed;
-			}*/
+			}
+			if(FlxG.keys.justPressed("UP") && velocity.y == 0)
+			{
+				y -= 1;
+				velocity.y = -jumpSpeed;
+			}
 			if(FlxG.keys.justPressed("Q"))
 			{
 				explode(4);
