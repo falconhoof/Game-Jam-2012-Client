@@ -121,7 +121,7 @@ package
 			
 			var submitData : URLVariables = new URLVariables();
 			
-			for ( var i : Number = 0; trackedItems.length; i++) {
+			for ( var i : Number = 0; i < trackedItems.length; i++) {
 				var object : Object = trackedItems[i];
 				submitData[object.item] = object.value;
 			}

@@ -181,7 +181,10 @@ package
 			//check to see if we have levels left
 			//if not go to exit screen(currently start screen)
 			//endLevel=true;
+
 			levelId++;
+			statsTracker.submitStats();
+
 			if (levelId>levels.length-1)
 			{
 				OnEndGame();
@@ -380,13 +383,9 @@ package
 			statsTracker.trackItem("platforms");
 			statsTracker.trackItem("spawn points");
 			statsTracker.trackItem("trees");
-			
-			//triggerText=new FlxText(0,FlxG.height/2-20,FlxG.width,"Hello");
-			//triggerText.color=0xFF000000;
-			//triggerText.size=40;
-			//triggerText.alignment = "center";
-			//add(triggerText);
-	
+			statsTracker.trackItem("levelId");
+			statsTracker.setValue("levelId", levelId);
+
 		}
 		
 		override public function update():void
