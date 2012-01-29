@@ -27,6 +27,9 @@ package
 		protected var spawnSprite:PlayerSpawn;
 		protected var spawning:Boolean;
 		protected var spawnTimer: Number;
+		protected var creation:CreationSprite;
+		protected var createX: Number;
+		protected var createY:Number;
 		
 		private var jumpSpeed : Number;
 		private var runSpeed : Number;
@@ -410,41 +413,69 @@ package
 			(FlxG.state as PlayState).killTrees(x,y);
 		}
 		
-		public function createTiles():void
+		public function tilesCreated(name:String, frameNo:uint, frameInd:uint):void
 		{
-			var platformHeight:int = (y / tileSize) + 1;
+			if (frameNo == 14)
+			{
+				actualCreateTiles();
+				FlxG.state.remove(creation);
+			}
+				
+		}
+		
+		public function actualCreateTiles():void
+		{
+			
+			
+			
+			FlxG.log("actual create tiles" );
+			var platformHeight:int = (createY / tileSize) + 1;
 			/*
 			if (facing == FlxObject.RIGHT)
 			{
-				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x + width + 1) / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x + width * 2) / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x + width * 3) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x + width + 1) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x + width * 2) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x + width * 3) / tileSize, platformHeight, FLAT_TILE);
 			}
 			else
 			{
-				_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x - width) / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x - (width * 2)) / tileSize, platformHeight, FLAT_TILE);
-				_map.setTile((x - (width * 3)) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x - width) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x - (width * 2)) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((x - (width * 3)) / tileSize, platformHeight, FLAT_TILE);
 			}*/
 			
 			//   O
 			// XXXXX
 			// block of 5 tiles, centred on player
-			_map.setTile(x / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile(createX / tileSize, platformHeight, FLAT_TILE);
 			//one to each side
-			_map.setTile((x+tileSize+1) / tileSize, platformHeight, FLAT_TILE);
-			_map.setTile((x-tileSize) / tileSize,  platformHeight, FLAT_TILE);
+			_map.setTile((createX+tileSize+1) / tileSize, platformHeight, FLAT_TILE);
+			_map.setTile((createX-tileSize) / tileSize,  platformHeight, FLAT_TILE);
 			//second on each side
-			 _map.setTile((x+(tileSize *2)) / tileSize,  platformHeight, FLAT_TILE);
-			_map.setTile((x-(tileSize *2)) / tileSize, platformHeight, FLAT_TILE);
-
+			_map.setTile((createX+(tileSize *2)) / tileSize,  platformHeight, FLAT_TILE);
+			_map.setTile((createX-(tileSize *2)) / tileSize, platformHeight, FLAT_TILE);
 			
 			
-			kill();
+			
+			
 			FlxG.camera.shake(0.001,0.35);
 			FlxG.camera.flash(0xff0000a2,0.35);
+			
+		}
+		
+		public function createTiles():void
+		{
+			createX = x;
+			createY = y;
+			creation = new CreationSprite((closestTilePos(x)-64), (closestTilePos(y)-32));
+			FlxG.state.add(creation);
+			
+			creation.addAnimationCallback(tilesCreated);
+			creation.play("create");
+			kill();
+			
 			
 		}
 		
