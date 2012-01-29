@@ -10,6 +10,10 @@ package  {
 		
 		
 		public function MapDavidMap() {
+			treesAllowed = 2;
+			platformsAllowed = 2;
+			explosionsAllowed = 2;
+			
 			
 			_setCustomValues();
 			

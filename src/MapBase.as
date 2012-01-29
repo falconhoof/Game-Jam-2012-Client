@@ -25,6 +25,11 @@ package  {
 		private var gradientA : FlxSprite;
 		
 		public var backgroundSprites : Array;
+		
+		public var treesAllowed : Number = 0;
+		public var platformsAllowed : Number = 0;
+		public var explosionsAllowed : Number = 0;
+		public var respawnsAllowed : Number = 0;
 		// end DF
 		
 		public function MapBase() { }

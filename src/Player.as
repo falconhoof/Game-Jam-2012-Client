@@ -28,6 +28,11 @@ package
 		public static const LEFT_CURVE:Number = 7;
 		public static const RIGHT_CURVE:Number = 8;
 		
+		public var treesLeft : Number;
+		public var explosionsLeft : Number;
+		public var platformsLeft : Number;
+		public var respawnsLeft : Number;
+		
 		//This is the player object class.  Most of the comments I would put in here
 		//would be near duplicates of the Enemy class, so if you're confused at all
 		//I'd recommend checking that out for some ideas!
@@ -54,6 +59,9 @@ package
 			acceleration.y = 2000;
 			maxVelocity.x = runSpeed;
 			
+			treesLeft = 0;
+			explosionsLeft = 0;
+			platformsLeft = 0;
 			
 			jumpSpeed = 500;
 			//animations
@@ -158,43 +166,55 @@ package
 			}
 			if(FlxG.keys.justPressed("Q"))
 			{
-				explode(4);
-				
-				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffd8eba2,0.35);	    
-				                
-				stats.increment("explosions");
-
+				if ( explosionsLeft > 0 ) {
+					explosionsLeft--;
+					explode(4);
+					
+					FlxG.camera.shake(0.005,0.35);
+					FlxG.camera.flash(0xffd8eba2,0.35);	    
+					                
+					stats.increment("explosions");
+				}
 			}
 			if(FlxG.keys.justPressed("W"))
 			{
 				if (canCreate())
 				{
-					createTiles();
+					if ( platformsLeft > 0 ) {
+						platformsLeft --;
+						createTiles();
+						
+						FlxG.camera.shake(0.005,0.35);
+						FlxG.camera.flash(0xffd8eba2,0.35);	   
+						
+						stats.increment("platforms");
+					}
 					
-					FlxG.camera.shake(0.005,0.35);
-					FlxG.camera.flash(0xffd8eba2,0.35);	   
-					
-					stats.increment("platforms");
 				}
 			}
 			if(FlxG.keys.justPressed("E"))
 			{
-				createSpawn();
-				
-				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0xffffeba2,0.35);	
-				
-				stats.increment("spawn_points");
+				if ( respawnsLeft > 0 ) {
+					respawnsLeft--;
+					createSpawn();
+					
+					FlxG.camera.shake(0.005,0.35);
+					FlxG.camera.flash(0xffffeba2,0.35);	
+					
+					stats.increment("spawn_points");
+				}
 			}
 			if(FlxG.keys.justPressed("R"))
 			{
-				createTree();
-				
-				FlxG.camera.shake(0.005,0.35);
-				FlxG.camera.flash(0x11ff11a2,0.35);	
-
-				stats.increment("trees");
+				if ( treesLeft > 0 ) {
+					treesLeft--;
+					createTree();
+					
+					FlxG.camera.shake(0.005,0.35);
+					FlxG.camera.flash(0x11ff11a2,0.35);	
+	
+					stats.increment("trees");
+				}
 			}
 			
 			if(velocity.y != 0)

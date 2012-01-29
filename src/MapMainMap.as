@@ -9,6 +9,10 @@ package  {
 
 		
 		public function MapMainMap() {
+			
+			treesAllowed = 1;
+			platformsAllowed = 1;
+			explosionsAllowed = 3;
 
 			_setCustomValues();
 

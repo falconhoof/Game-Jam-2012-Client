@@ -172,6 +172,10 @@ package
 			
 			
 			setupPlayer();	
+			player.treesLeft = map.treesAllowed;
+			player.platformsLeft = map.platformsAllowed;
+			player.respawnsLeft = map.respawnsAllowed;
+			player.explosionsLeft = map.explosionsAllowed;
 			//endLevel=false;
 		}
 		
