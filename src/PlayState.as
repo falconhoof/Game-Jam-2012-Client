@@ -450,6 +450,12 @@ package
 			fgLetterbox = new FlxSprite(0, 0, FgLetterboxClass);
 			add(fgLetterbox);
 			
+			sacrificeText = new FlxText(25,FlxG.height- 25,800,"Current Sacrifice: " + player.getSacrifice());
+			sacrificeText.size = 16;
+			sacrificeText.alignment = "left";
+			sacrificeText.color=0xFFffffff;
+			add(sacrificeText);
+			
 		}
 		
 		override public function update():void
@@ -549,11 +555,18 @@ package
 		
 		public override function draw():void
 		{
-			sacrificeText = new FlxText(25,FlxG.height- 25,400,"Current Sacrifice: " + player.getSacrifice());
-			sacrificeText.size = 16;
-			sacrificeText.alignment = "left";
-			sacrificeText.color=0xFFffffff;
-			add(sacrificeText);
+			var sacrificeLeft : String = "";
+			
+			if ( player.getSacrifice() == "Trees") {
+				sacrificeLeft = ""+player.treesLeft;
+			} else if ( player.getSacrifice() == "Explosions") {
+				sacrificeLeft = ""+player.explosionsLeft;
+			} if ( player.getSacrifice() == "Platforms") {
+				sacrificeLeft = ""+player.platformsLeft;
+			} 
+			
+			sacrificeText.text = "Current Sacrifice: " + player.getSacrifice() + " ( "+ sacrificeLeft +" remaining)";
+			
 			super.draw();
 			
 		}
