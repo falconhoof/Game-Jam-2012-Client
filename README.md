@@ -6,7 +6,7 @@
 
 # Installation
 
-* Open Flash Builder and navigate
+* Open Flash Builder and navigate to File -> New ->  ActionScript Project
   * Enter the **project name** as `Game-Jam-2012-Client`
   * Enter the **folder** you cloned the repository into e.g. `/Volumes/GitHub` e.g.
 
