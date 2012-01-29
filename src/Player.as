@@ -11,7 +11,7 @@ package
 		[Embed(source = "../assets/Audio_CreatePlatform.mp3")] private var createPlatformSound:Class;
 		[Embed(source = "../assets/Audio_CreateTree.mp3")] private var createTreeSound:Class;
 		[Embed(source = "../assets/Audio_SpawnIn.mp3")] private var spawnInSound:Class;
-		[Embed(source = "../assets/Audio_Footstep.mp3")] private var footstepSound:Class;
+		[Embed(source = "../assets/Audio_Footstep_Fixed.mp3")] private var footstepSound:Class;
 		
 		private var footstep:FlxSound;
 		
