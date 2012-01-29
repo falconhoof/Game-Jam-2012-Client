@@ -15,6 +15,7 @@ package
 		//----------------------------------------------------------------------
 		protected var m_swf   	: MovieClip = null;
 		private var timer		: Number	= 0;
+		private var exit : Boolean = false;
 		//----------------------------------------------------------------------
 		public function IntroMovieState() : void
 		{
@@ -39,7 +40,10 @@ package
 		}
 		
 		public function nextScene( e : Event) : void {
-			FlxG.switchState(new MenuState(m_swf));
+			if (!exit) {
+				exit = true;
+				FlxG.switchState(new MenuState(m_swf));
+			}
 		}
 		//----------------------------------------------------------------------
 		

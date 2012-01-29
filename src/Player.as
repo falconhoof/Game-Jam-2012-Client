@@ -268,7 +268,7 @@ package
 				}
 			}*/
 			
-			if ( FlxG.keys.justPressed("SHIFT") ) {
+			if ( FlxG.keys.justPressed("SHIFT")  || FlxG.keys.justPressed("TAB")) {
 				currentSacrifice ++;
 				if ( currentSacrifice > (sacrifices.length-1)) {
 					currentSacrifice = 0;

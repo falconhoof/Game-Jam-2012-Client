@@ -10,8 +10,13 @@ package
 		
 		public  function MenuState(m : MovieClip) {
 			super();
-			if ( m != null)
-				FlxG.stage.removeChild(m);
+			if ( m != null) {
+				try {
+				FlxG.stage.removeChild(m); 
+				} catch (error: Error) {
+					//dunno!
+				}
+			}
 		}
 		
 		override public function create():void
