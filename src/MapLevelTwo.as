@@ -43,7 +43,7 @@ package  {
 			FlxG.state.add(obj);
 			if(onAddCallback != null)
 				onAddCallback(obj);
-			obj = new DestroyTutorialTrigger(306, 317);;
+			obj = new DestroyTutorialTrigger(306, 303);;
 			obj.x+=obj.offset.x;
 			obj.y+=obj.offset.y;
 			FlxG.state.add(obj);
