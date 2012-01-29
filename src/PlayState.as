@@ -137,12 +137,13 @@ package
 			}
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
+
 			canopies = new FlxGroup();
 			explosions = new FlxGroup();
-=======
+
 			pickups=new FlxGroup();
 			
->>>>>>> Initial stab at pickup, partial update so I can test with player movement
+
 			map=levels[levelId];
 			map.decorateBackground(levelId);
 			
