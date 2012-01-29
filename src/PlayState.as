@@ -304,11 +304,13 @@ package
 			
 			//map=new MapMainMap();
 
+			map=new MapDavidMap();
+			levels.push(map);
+			
 			map=new TutorialOne();
 			levels.push(map);
 			
-			map=new MapDavidMap();
-			levels.push(map);
+		
 			
 
 			

@@ -291,7 +291,7 @@ package
 				} else if ( sacrifices[currentSacrifice] == "Explosions") {
 					if ( explosionsLeft > 0 ) {
 						explosionsLeft--;
-						explode(4);
+						explode(3);
 						
 						FlxG.camera.shake(0.005,0.35);
 						FlxG.camera.flash(0xffd8eba2,0.35);	    
@@ -350,6 +350,12 @@ package
 		
 		public function explode(diameter:int):void
 		{
+			var explosion:Explode;
+			explosion = new Explode((x-59), (y-43));
+			FlxG.state.add(explosion);
+			kill();
+			explosion.play("grow");
+			
 			_map.setTile(x / tileSize, (y / tileSize) + 1, EMPTY_TILE);
 			
 			for (var i:int = 1; i < diameter; i++)
