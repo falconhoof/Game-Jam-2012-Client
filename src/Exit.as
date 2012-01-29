@@ -4,7 +4,7 @@ package
 	
 	public class Exit extends FlxSprite
 	{
-		[Embed(source="../assets/exit.png")] private static var ImgExit:Class;
+		[Embed(source="../assets/main_ExitFlag.png")] private static var ImgExit:Class;
 		
 		function Exit(X:Number=0, Y:Number=0)
 		{
