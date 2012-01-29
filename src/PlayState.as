@@ -201,6 +201,13 @@ package
 		
 		public function OnRestartButtonClick():void
 		{
+			
+			FlxG.camera.fade(0xFF000000,1,OnResetFadeDone,true);
+		}
+		
+		public function OnResetFadeDone():void
+		{
+			FlxG.flash();
 			FlxG.switchState(new PlayState(levelId));
 		}
 		
