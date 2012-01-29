@@ -21,44 +21,44 @@ package
 			add(background);
 			
 			var t:FlxText;
-			t = new FlxText(0,FlxG.height/2-20,FlxG.width,"Summary");
+			t = new FlxText(0,100,FlxG.width,"Summary");
 			t.color=0xFF000000;
 			t.size = 32;
 			t.alignment = "center";
 			add(t);
-			t = new FlxText(FlxG.width/2-100,FlxG.height-100,200,"You completed the level using: ");
+			t = new FlxText(FlxG.width/2-100,200,200,"You completed the level using: ");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;
 			add(t);
 			
 			
-			t = new FlxText(FlxG.width/2-100,FlxG.height-80,200, statsTracker.getValue("explosions") + " explosions");
+			t = new FlxText(FlxG.width/2-100,350,200, statsTracker.getValue("explosions") + " explosions");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,FlxG.height-60,200, statsTracker.getValue("trees") + " trees");
+			t = new FlxText(FlxG.width/2-100,400,200, statsTracker.getValue("trees") + " trees");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,FlxG.height-40,200, statsTracker.getValue("platforms") + " platforms");
+			t = new FlxText(FlxG.width/2-100,450,200, statsTracker.getValue("platforms") + " platforms");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(FlxG.width/2-100,FlxG.height-20,200, statsTracker.getValue("spawn_points") + " spawn points");
+			t = new FlxText(FlxG.width/2-100,500,200, statsTracker.getValue("spawn_points") + " spawn points");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;
 			add(t);
 			
 			
-			t = new FlxText(FlxG.width/2-100,FlxG.height-10,200,"Press any Key");
+			t = new FlxText(FlxG.width/2-100,600,200,"Press any Key");
 			t.size = 16;
 			t.alignment = "center";
 			t.color=0xFF000000;

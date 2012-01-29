@@ -245,10 +245,11 @@ package
 			
 			//map=new MapMainMap();
 
-			map=new MapMainMap();
-			levels.push(map);
 			
 			map=new MapDavidMap();
+			levels.push(map);
+			
+			map=new MapMainMap();
 			levels.push(map);
 			
 			OnStartLevel();
