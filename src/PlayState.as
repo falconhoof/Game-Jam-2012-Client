@@ -56,6 +56,8 @@ package
 		// stats tracking
 		public var statsTracker : StatsTracker;
 		private var loadJSONData : JSONLoad;
+		
+		//Button for restart
 
 		
 		// Some static constants for the size of the tilemap tiles
@@ -193,8 +195,14 @@ package
 			//endLevel=false;
 			ambientPlayback.loadEmbedded(ambientSound, true);
 			ambientPlayback.play();
+			
+
 		}
 		
+		public function OnRestartButtonClick():void
+		{
+			FlxG.switchState(new PlayState(levelId));
+		}
 		
 		public function OnEndLevel():void
 		{
@@ -425,6 +433,10 @@ package
 
 			
 			startEffects();
+			//create button
+			resetBtn=new FlxButton(FlxG.width-100,FlxG.height- 50,"Restart",OnRestartButtonClick);
+			add(resetBtn);
+			FlxG.mouse.show();
 		}
 		
 		// Jon's function!
