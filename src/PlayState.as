@@ -36,6 +36,7 @@ package
 		[Embed(source = "../assets/fg_letterbox.png")] private static var FgLetterboxClass:Class;
 		
 		[Embed(source = "../assets/Audio_Ambience.mp3")] private var ambientSound:Class;
+		[Embed(source = "../assets/Audio_Pickup.mp3")] private var pickUpSound:Class;
 		private var ambientPlayback:FlxSound;
 
 		[Embed(source="../assets/fg_mistFX.png")] private static var FgMistClass:Class;
@@ -535,6 +536,8 @@ package
 		
 		public function HandlePickUps(p:Player, pUp:Pickup):void
 		{
+			FlxG.play(pickUpSound);
+			
 			pUp.kill();
 			
 			statsTracker.increment("pickups");
