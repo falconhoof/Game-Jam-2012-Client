@@ -37,7 +37,6 @@ package  {
 
 		override public function addSpritesToLayerMainGame(onAddCallback:Function = null):void {
 			var obj:FlxSprite;
-			var obj:FlxSprite;
 			
 			obj = new Player(64, 272);;
 			obj.x+=obj.offset.x;
