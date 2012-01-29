@@ -381,9 +381,10 @@ package
 			statsTracker  = new StatsTracker();
 			statsTracker.trackItem("explosions");
 			statsTracker.trackItem("platforms");
-			statsTracker.trackItem("spawn points");
+			statsTracker.trackItem("spawn_points");
 			statsTracker.trackItem("trees");
 			statsTracker.trackItem("levelId");
+			statsTracker.trackItem("pickups");
 			statsTracker.setValue("levelId", levelId);
 
 		}
