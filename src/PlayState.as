@@ -250,7 +250,7 @@ package
 			
 			//map=new MapMainMap();
 
-			map=new MapMainMap();
+			map=new TutorialOne();
 			levels.push(map);
 			
 			map=new MapDavidMap();
