@@ -11,7 +11,7 @@ package
 	public class IntroMovieState extends FlxState
 	{
 		//----------------------------------------------------------------------
-		[Embed(source = './assets/frontend_titlesplash.swf')] private var SwfClass:Class;
+		[Embed(source = '../assets/frontend_titlesplash.swf')] private var SwfClass:Class;
 		//----------------------------------------------------------------------
 		protected var m_swf   	: MovieClip = null;
 		private var timer		: Number	= 0;

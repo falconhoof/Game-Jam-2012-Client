@@ -4,7 +4,8 @@ package
 	
 	public class SummaryState extends FlxState
 	{
-		[Embed(source="../assets/summaryBackground.png")] private static var ImgBackground:Class;
+		[Embed(source = "../assets/summaryBackground.png")] private static var ImgBackground:Class;
+		[Embed(source = "../assets/Audio_SummaryScreen.mp3")] private var summarySound:Class;
 		
 		private var currentLevel:Number=0;
 		private var statsTracker : StatsTracker;
@@ -75,6 +76,7 @@ package
 			add(t);
 			
 			FlxG.mouse.hide();
+			FlxG.play(summarySound);
 		}
 		
 		override public function update():void

@@ -4,7 +4,8 @@ package
 	
 	public class EndGameState extends FlxState
 	{
-		[Embed(source="../assets/summaryBackground.png")] private static var ImgBackground:Class;
+		[Embed(source = "../assets/summaryBackground.png")] private static var ImgBackground:Class;
+		[Embed(source = "../assets/Audio_EndScreen.mp3")] private var endSound:Class;
 		
 		private var currentLevel:Number=0;
 		private var statsTracker : StatsTracker;
@@ -74,6 +75,7 @@ package
 			add(t);
 			
 			FlxG.mouse.hide();
+			FlxG.play(endSound);
 		}
 		
 		override public function update():void
