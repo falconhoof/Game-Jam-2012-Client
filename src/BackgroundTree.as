@@ -28,7 +28,7 @@ package
 			
 			
 			randomTree = Math.round((Math.random() * 5));
-			loadGraphic(treeArray[randomTree],true,true,128, 128);
+			loadGraphic(treeArray[randomTree],true,false,64, 128);
 			
 			
 		}

@@ -22,31 +22,31 @@ package
 			add(background);
 			
 			var t:FlxText;
-			t = new FlxText(0,100,FlxG.width,"Summary");
+			t = new FlxText(150,150,FlxG.width,"Summary");
 			t.color=0xFF000000;
 			t.size = 32;
-			t.alignment = "center";
+			t.alignment = "left";
 			add(t);
-			t = new FlxText(400,200,400,"You completed the level using: ");
+			t = new FlxText(150,200,400,"You completed the level using: ");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
 			
-			t = new FlxText(450,250,200, statsTracker.getValue("explosions") + " explosions");
+			t = new FlxText(150,260,200, statsTracker.getValue("explosions") + " explosions");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(450,290,200, statsTracker.getValue("trees") + " trees");
+			t = new FlxText(150,290,200, statsTracker.getValue("trees") + " trees");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
-			t = new FlxText(450,320,200, statsTracker.getValue("platforms") + " platforms");
+			t = new FlxText(150,320,200, statsTracker.getValue("platforms") + " platforms");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
@@ -62,14 +62,14 @@ package
 			if ( statsTracker.getValue("pickups") > 0) {
 				successString = "You retrieved the soul gem";
 			}
-			t = new FlxText(400,520,800, successString);
+			t = new FlxText(150,490,800, successString);
 			t.size = 32;
 			t.alignment = "left";
 			t.color=0xFF000000;
 			add(t);
 			
 			
-			t = new FlxText(FlxG.width/2-100,600,200,"Press any Key");
+			t = new FlxText(150,570,200,"Press any Key");
 			t.size = 16;
 			t.alignment = "left";
 			t.color=0xFF000000;
