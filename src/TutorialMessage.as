@@ -7,17 +7,16 @@ package
 	public class TutorialMessage extends FlxSprite
 	{
 		[Embed(source="../assets/ui_TutorialBubble.png")] protected var ImgTut:Class;
-		protected var message:String="Message";
 		
 		public function TutorialMessage(X:Number=0, Y:Number=0)
 		{
 			super(X, Y);
-			loadGraphic(ImgTut,false,false,256,256);	
+			//loadGraphic(ImgTut,false,false,256,256);	
 		}
 		
 		public function loadMessageImage(img:Class,X:Number=0, Y:Number=0):void
 		{
-			loadGraphic(img,true,true,128,64);
+			loadGraphic(img,false,false,128,128);
 		}
 	}
 }

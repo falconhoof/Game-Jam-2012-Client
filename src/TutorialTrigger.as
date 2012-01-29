@@ -13,15 +13,15 @@ package
 		{
 			super(X,Y+16);
 			loadGraphic(ImgTutTrigger,true,true,32,64);
-			SetUpMessage();
+			//SetUpMessage();
 		}
 		
-		public function SetUpMessage():void
+		public function SetUpMessage(img:Class):void
 		{
 			tutorialMessage=new TutorialMessage(0,0);
-			//tutorialMessage.loadMessageImage(img,0,0);
+			tutorialMessage.loadMessageImage(img,0,0);
 			tutorialMessage.x=this.x+this.width;
-			tutorialMessage.y=this.y-tutorialMessage.height/2;
+			tutorialMessage.y=this.y-tutorialMessage.height;
 			tutorialMessage.visible=false;
 			FlxG.state.add(tutorialMessage);			
 		}
@@ -29,13 +29,15 @@ package
 		public function ShowMessage():void
 		{
 			//trigger open anim
-			tutorialMessage.visible=true;
+			if (tutorialMessage!=null)
+				tutorialMessage.visible=true;
 		}
 		
 		public function HideMessage():void
 		{
 			//triger close
-			tutorialMessage.visible=false;
+			if (tutorialMessage!=null)
+				tutorialMessage.visible=false;
 		}
 	}
 }
