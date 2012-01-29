@@ -465,22 +465,24 @@ package
 			
 			iconDisplay=new FlxGroup();
 			var pUISprite:PowerUISprite=new PowerUISprite(32,FlxG.height- 260);
-			pUISprite.loadGraphic(treeIcon,true,false,128,128,false);
+			pUISprite.loadGraphic(platformIconClass,true,false,128,128,false);
 			pUISprite.play("Idle");
 			iconDisplay.add(pUISprite);
 			
-			pUISprite=new PowerUISprite(32,FlxG.height- 260);
-			pUISprite.loadGraphic(platformIconClass,true,false,128,128,false);
-			pUISprite.play("Idle");
-			pUISprite.visible=false;
-			iconDisplay.add(pUISprite);
+			
 			
 			pUISprite=new PowerUISprite(32,FlxG.height- 260);
 			pUISprite.loadGraphic(explodeIconClass,true,false,128,128,false);
 			pUISprite.play("Idle");
 			pUISprite.visible=false;
-			
 			iconDisplay.add(pUISprite);
+			
+			pUISprite=new PowerUISprite(32,FlxG.height- 260);
+			pUISprite.loadGraphic(treeIcon,true,false,128,128,false);
+			pUISprite.play("Idle");
+			pUISprite.visible=false;
+			iconDisplay.add(pUISprite);
+		
 			add(iconDisplay);
 			
 			FlxG.mouse.show();
@@ -616,17 +618,21 @@ package
 		
 		public function climbTree(p:Player, treeToClimb:Tree):void
 		{
-			FlxG.log("Climb Tree in play state"+treeToClimb);
+			
 			player.play("climbTree");
 			if (player.y > treeToClimb.y -5)
 			{
+				FlxG.log("this is updating y");
 				player.y = treeToClimb.y-64;
-				
+				FlxG.log("this is updating before " + player.x);
+				player.x = treeToClimb.x+32;
+				FlxG.log("this is updating after" + player.x);
+				player.climbTree(treeToClimb);
 			}
 			//player.canClimb = true;
 			//player.treeToClimb = treeToClimb;
-			FlxG.log("Climb Tree in play state, climbing tree"+treeToClimb);
-			player.climbTree(treeToClimb);
+			
+			
 		}
 
 		public function plantTreeFirmly(tree:Tree, m:FlxTilemap):void

@@ -89,9 +89,11 @@ package
 			addAnimation("climbTree", [3,4,7,4,3], 25);
 			
 			sacrifices = new Array();
-			sacrifices.push("Trees");
 			sacrifices.push("Platforms");
 			sacrifices.push("Explosions");
+			sacrifices.push("Trees");
+			
+			
 			currentSacrifice = 0;
 			
 			FlxG.play(spawnInSound);
@@ -499,12 +501,12 @@ package
 		public function climbTree(tree:Tree):void
 		{
 			keyboardInputEnabled = false;
-			FlxG.log("Climbing Tree "+tree);
+			FlxG.log("playerxa " + x);
 			treeToClimb=tree;
 			treeClimbSprite=new TreeClimbSprite(0,0);
 			treeClimbSprite.x=treeToClimb.x;
 			treeClimbSprite.y=treeToClimb.y-64;
-			
+			FlxG.log("playerxb " + x);
 			FlxG.state.add(treeClimbSprite);
 			//treeToClimb.visible=false;
 			
@@ -512,7 +514,7 @@ package
 			
 			this.visible=false;
 			treeClimbSprite.play("Climb");
-			
+			FlxG.log("playerxc " + x);
 			
 			//Comment out put back in animation is feckered
 			//play("climbTree");
@@ -536,10 +538,10 @@ package
 					//treeToClimb.visible=true;
 
 				
-					y = treeToClimb.y - this.height - 20 ;
+				//	y = treeToClimb.y - this.height - 20 ;
 			
 					//	treeToClimb.y;
-		
+					x = x + 32;
 					treeClimbSprite.visible=false;
 					this.visible=true;
 					FlxG.state.remove(treeClimbSprite);
