@@ -303,16 +303,33 @@ package
 			gradientA = new FlxSprite(0,0, BgGradientA);
 			gradientA.solid = false;
 			gradientA.moves = false;
-			gradientA.alpha = 1;
-			gradientA.blend = "multiply";
+		//	gradientA.alpha = 1;
+		//	gradientA.blend = "multiply";
 			add(gradientA);
 			
-			//map=new MapMainMap();
-
-			map=new MapDavidMap();
+		
+			map = new MapLevelZero();
 			levels.push(map);
 			
-			map=new TutorialOne();
+			map = new MapLevelOne();
+			levels.push(map);
+			
+			map = new MapLevelTwo();
+			levels.push(map);
+			
+			map = new MapLevelSeven();
+			levels.push(map);
+			
+			map = new MapLevelThree();
+			levels.push(map);
+			
+			map = new MapLevelFour();
+			levels.push(map);
+			
+			map = new MapLevelFive();
+			levels.push(map);
+			
+			map = new MapLevelSix();
 			levels.push(map);
 			
 		
@@ -669,7 +686,7 @@ package
 				sacrificeLeft = ""+player.platformsLeft;
 			} 
 			
-			sacrificeText.text = "Sacrifices: " + sacrificeLeft;
+			sacrificeText.text = "x " + sacrificeLeft;
 			
 			super.draw();
 			

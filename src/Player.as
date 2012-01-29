@@ -300,7 +300,7 @@ package
 						createTree();
 						
 						FlxG.camera.shake(0.005,0.35);
-						FlxG.camera.flash(0x11ff11a2,0.35);	
+						FlxG.camera.flash(0xFFFFFFFF,0.35);	
 						
 						FlxG.play(createTreeSound);
 						
@@ -312,7 +312,7 @@ package
 						explode(3);
 						
 						FlxG.camera.shake(0.005,0.35);
-						FlxG.camera.flash(0xffd8eba2,0.35);	    
+						FlxG.camera.flash(0xFFFFFFFF,0.35);	    
 						
 						FlxG.play(explosionSound);
 						
@@ -326,7 +326,7 @@ package
 							createTiles();
 							
 							FlxG.camera.shake(0.005,0.35);
-							FlxG.camera.flash(0xffd8eba2, 0.35);	
+							FlxG.camera.flash(0xFFFFFFFF, 0.35);	
 							
 							FlxG.play(createPlatformSound);
 							
@@ -463,7 +463,7 @@ package
 			
 			
 			FlxG.camera.shake(0.001,0.35);
-			FlxG.camera.flash(0xff0000a2,0.35);
+			//FlxG.camera.flash(0xffffffa2,0.35);
 			
 		}
 		
@@ -544,6 +544,7 @@ package
 					x = x + 32;
 					treeClimbSprite.visible=false;
 					this.visible=true;
+					treeClimbSprite.kill();
 					FlxG.state.remove(treeClimbSprite);
 				}
 			
