@@ -71,6 +71,7 @@ package
 		public var canopies:FlxGroup;
 		protected var explosions:FlxGroup;
 		protected var pickups:FlxGroup;
+		protected var pickupScoreDisplay:FlxGroup;
 
 		// Some interface buttons and text
 		private var autoAltBtn:FlxButton;
@@ -143,6 +144,7 @@ package
 
 			pickups=new FlxGroup();
 			
+			
 
 			map=levels[levelId];
 			map.decorateBackground(levelId);
@@ -202,6 +204,10 @@ package
 			tutorialTriggers = new Array(); 
 			trees = new FlxGroup();
 			pickups=new FlxGroup();
+			
+			//We only need to hide/show these
+			pickupScoreDisplay=new FlxGroup();
+			
 			/*mcLoader = new Loader(); 
 			var url : URLRequest = new URLRequest("../assets/fg_ParticleVideo.swf");
 			mcLoader.load(url);
