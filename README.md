@@ -2,17 +2,7 @@
 
 ![Past Life](http://i.imgur.com/c5c2X.png)
 
-The title of the game "Past-Life" captures both the mechanics of the game, and how we met the theme.
-
-In the game you control a character who must reach a flag at the end of each level.
-
-You can kill yourself in order to unleash a power. Each power changes the level in some way.
-
-When you are re-born, you can take advantage of the change that your past life made.
-
-Use the arrow keys to move, tab to cycle through your powers, and space to use a power.
-
-An entry for the 2012 [Global Game Jam](http://globalgamejam.org/).
+The title of the game "Past-Life" captures both the mechanics of the game, and how we met the theme. In the game you control a character who must reach a flag at the end of each level. You can kill yourself in order to unleash a power. Each power changes the level in some way. When you are re-born, you can take advantage of the change that your past life made. Use the arrow keys to move, tab to cycle through your powers, and space to use a power.
 
 # Prerequisites
 
