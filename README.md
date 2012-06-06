@@ -1,8 +1,8 @@
 # Past Life
 
-![Past Life](http://i.imgur.com/c5c2X.png)
+[![Play Past Life](http://i.imgur.com/c5c2X.png)](http://falconhoof.github.com/Game-Jam-2012-Client/)
 
-The title of the game "Past-Life" captures both the mechanics of the game, and how we met the theme. In the game you control a character who must reach a flag at the end of each level. You can kill yourself in order to unleash a power. Each power changes the level in some way. When you are re-born, you can take advantage of the change that your past life made. Use the arrow keys to move, tab to cycle through your powers, and space to use a power.
+[Play it now](http://falconhoof.github.com/Game-Jam-2012-Client/)! The title of the game "Past-Life" captures both the mechanics of the game, and how we met the theme. In the game you control a character who must reach a flag at the end of each level. You can kill yourself in order to unleash a power. Each power changes the level in some way. When you are re-born, you can take advantage of the change that your past life made. Use the arrow keys to move, tab to cycle through your powers, and space to use a power.
 
 # Prerequisites
 
