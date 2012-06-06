@@ -1,3 +1,9 @@
+# Past Life
+
+![Past Life](http://i.imgur.com/c5c2X.png)
+
+An entry for the 2012 [Global Game Jam](http://globalgamejam.org/).
+
 # Prerequisites
 
 * [Adobe Flash Builder](http://www.adobe.com/products/flash-builder.html) (60-day free trial available) or similar.
